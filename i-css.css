@@ -1,0 +1,10 @@
+/*CSS Style File*/
+body{
+    background-image: url("assets/WP_stars.jpg");
+}
+
+h1{
+    text-align: center;
+    border-style: solid;
+    padding: 30px;
+}
