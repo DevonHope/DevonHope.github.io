@@ -1,5 +1,5 @@
 //js file for console input/output handeling
-const console = document.getElementById('console');
+const console = document.getElementsByName('console');
 
 //set console start output
 console.value = "Welcome to the house of Devon Hopes resume. \n"+

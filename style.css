@@ -8,7 +8,7 @@ body,html{
 }
 
 h1{
-    text-align: left;
+    text-align: center;
     background-color: Transparent;
     color: #FFFFFF;
 }
@@ -18,13 +18,14 @@ h1{
 }
 
 /*formatting for console*/
-
 .console{
-    width: auto;
-    height: auto;
+    text-align: center;
+}
+.console > input{
     text-align: left;
-    background-color: Transparent;
-    font-size: 2em;
-    color: #0e380d;
+    color: #FFFFFF;
     border: none;
+    font-family:  'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    background-color: Transparent;
+    font-size: 1em;
 }
