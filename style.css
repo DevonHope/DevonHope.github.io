@@ -1,13 +1,15 @@
 /*CSS Style File*/
+@import 'assets/ibm-plex/css/ibm-plex.css';
 body,html{
     margin:0;
     padding:0;
-    font-family: ISO,sans-serif;
+    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     font-size:12px;
-    /*Background animation stuff*/
     background: #2980b9 url('assets/nightlights.jpg');
     background-attachment: fixed;
     background-size: cover;
+    background-position: center;
+    /*background-position: top 10em;*/
 }
 
 h1{
@@ -16,6 +18,14 @@ h1{
 #app-header-title{
     font-size: 6em;
     font-weight: 200;
+}
+
+h2{
+    font-size: 2em;
+    font-weight: 200;
+}
+#work_button{
+
 }
 
 .button_work{
