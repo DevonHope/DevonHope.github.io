@@ -4,79 +4,27 @@ body,html{
     margin:0;
     padding:0;
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-    font-size:12px;
-    background-color: #060c3c;
-    /*background: url('assets/wp/stars-extend.jpg');*/
-    background-attachment: fixed;
-    background-size: contain;
-    background-position: center;
+    background-color: #000000;
 }
 
 h1{
-    text-align: center;
+    text-align: left;
     background-color: Transparent;
     color: #FFFFFF;
 }
 #app-header-title{
-    font-size: 6em;
+    font-size: 3em;
     font-weight: 200;
-    text-shadow:
-        -2px -2px 0 #000,
-		2px -2px 0 #000,
-		-2px 2px 0 #000,
-		2px 2px 0 #000;
 }
 
-/*formatting background img*/
-#bg_img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+/*formatting for console*/
+
+.console{
     width: auto;
-    max-width: 100%;
     height: auto;
-}
-
-/*formatting of buttons*/
-button{
-    font-size: 2em;
-    font-weight: 200;
+    text-align: left;
     background-color: Transparent;
-    background-repeat:no-repeat;
+    font-size: 2em;
+    color: #0e380d;
     border: none;
-    cursor:pointer;
-    overflow: hidden;
-    height: 100px;
-}
-#w{
-    width: 300px;
-}
-#pe{
-    width: 400px;
-}
-
-/*position of buttons*/
-.work_button{
-    margin: 0;
-    position: absolute;
-    top: 53%;
-    left: 33%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-.edu_button{
-    margin: 0;
-    position: absolute;
-    top: 53%;
-    left: 65%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-.project_button{
-    margin: 0;
-    position: absolute;
-    top: 37%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
 }
