@@ -1,8 +1,5 @@
 /*CSS Style File*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
-*{
-    box-sizing: border-box;
-}
 .column{
     float: left;
     width: 50%;
@@ -56,17 +53,3 @@ header,footer,cons,res{
         grid-template-columns: 1fr;
     }
 }
-
-/*
-h1{
-    color: #FFFFFF;
-}
-#app-header-title{
-
-}
-
-footer{
-    color: #FFFFFF;
-}
-*/
-/*formatting for console*/
