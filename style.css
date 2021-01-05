@@ -41,6 +41,24 @@ header,footer,cons,res{
 #mainRes{
     grid-area: res;
 }
+#conout{
+    height: 20em;
+    width: 30em;
+    background: inherit;
+    color: inherit;
+    border: none;
+    font-weight: inherit;
+    font: inherit;
+    resize: none;
+}
+#conin{
+    width: 30em;
+    background: inherit;
+    color: inherit;
+    border: none;
+    font-weight: inherit;
+    font: inherit;
+}
 
 @media all and (max-width: 100%){
     body{

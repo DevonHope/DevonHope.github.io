@@ -1,5 +1,5 @@
 //js file for console input/output handeling
-const cons = document.getElementById('con');
+const cons = document.getElementById('conout');
 const curarea = document.getElementById('curarea');
 
 //set console start output
