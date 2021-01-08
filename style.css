@@ -1,27 +1,74 @@
 /*CSS Style File*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
-.column{
-    float: left;
-    width: 50%;
-    pa
-}
 body,html{
-    display: grid;
-    grid-template-areas:
-        "header"
-        "cons"
-        "res"
-        "footer";
-    grid-template-rows: 10% 35% 35% 10%;
-    grid-row-gap: 10px;
-    height: 100vh;
-    width: auto;
-    margin:0;
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     background-color: #000000;
 }
 
-header,footer,cons,res{
+#maingrid{
+    display: grid;
+    grid-template-rows: 1fr 3.5fr 3.5fr 1fr;
+    grid-column: 1fr;
+    grid-row-gap: 10px;
+    /*height: 100vh;*/
+    width: 30em;
+    margin:0;
+}
+/*set const decor settings for maingrid*/
+#maingrid > div{
+    background-color: inherit;
+    color: #FFFFFF;
+    text-align: center;
+    background: Transparent;
+    font-weight: 200;
+}
+
+#console{
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-column: 1fr;
+    grid-row-gap: 10px;
+    height: auto;
+    width: 30em;
+    margin:0;
+}
+#console > label{
+    color: #000000;
+    height: 1em;
+    width: 4em;;
+    background-color: #FFFFFF;
+}
+#console > textarea, input{
+    background-color: inherit;
+    color: #FFFFFF;
+    text-align: left;
+    background: Transparent;
+    font-weight: 200;
+    border: none;
+    resize: none;
+}
+#header{
+    font-size: 3em;
+}
+/*
+header,footer,res{
+    background-color: inherit;
+    color: #FFFFFF;
+    text-align: center;
+    background: Transparent;
+    font-weight: 200;
+}
+cons{
+    display: grid;
+    grid-template:
+        "label"
+        "textarea"
+        "input";
+    grid-template-rows: 2em 20em 2em;
+    grid-row-gap: 10px;
+    height: 100vh;
+    width: 30em;
+    margin: 0;
     background-color: inherit;
     color: #FFFFFF;
     text-align: center;
@@ -41,9 +88,12 @@ header,footer,cons,res{
 #mainRes{
     grid-area: res;
 }
+#curarea{
+    grid-area: label;
+}
 #conout{
+    grid-area: textarea;
     height: 20em;
-    width: 30em;
     background: inherit;
     color: inherit;
     border: none;
@@ -52,7 +102,7 @@ header,footer,cons,res{
     resize: none;
 }
 #conin{
-    width: 30em;
+    grid-area: input;
     background: inherit;
     color: inherit;
     border: none;
@@ -67,7 +117,15 @@ header,footer,cons,res{
             "cons"
             "res"
             "footer";
-        grid-template-rows: 10% 1fr 10% 1fr 10%;
+        grid-template-rows: 10% 35% 35% 10%;
         grid-template-columns: 1fr;
     }
-}
+    cons{
+        grid-template-areas:
+            "label"
+            "textarea"
+            "input";
+        grid-template-rows: 2em 20em 2em;
+        grid-template-columns: 1fr;
+    }
+}*/
