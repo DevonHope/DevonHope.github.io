@@ -3,16 +3,18 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
+        <script src="console.js"></script>
     </head>
-    <body>
+    <body onload="setup();">
         <main class="gc">
             <header class="head">Devon Hope</header>
             <div class="cons">
                 <div class="curarea">
-                    <label class="calbl">HOME</label>
+                    <label class="calbl" id="calbl"></label>
                 </div>
-                <textarea class="console" placeholder="Input textarea"></textarea>
-                <res class="res">res</res>
+                <textarea class="console" id="consout"></textarea>
+                <input class="in" id="in"></input>
+                <res class="res" id="res">res</res>
             </div>
             <footer class="foot">
                 <p>A webventure by Devon Hope. Also my resume.</p>
