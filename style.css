@@ -1,131 +1,89 @@
-/*CSS Style File*/
+/*TEST CSS*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
-body,html{
+body,html,.gc{
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     background-color: #000000;
+    height: 100%;
+    margin: auto;
+    color: #FFFFFF;
 }
 
-#maingrid{
+.gc{
     display: grid;
-    grid-template-rows: 1fr 3.5fr 3.5fr 1fr;
-    grid-column: 1fr;
-    grid-row-gap: 10px;
-    /*height: 100vh;*/
-    width: 30em;
-    margin:0;
-}
-/*set const decor settings for maingrid*/
-#maingrid > div{
-    background-color: inherit;
-    color: #FFFFFF;
-    text-align: center;
-    background: Transparent;
-    font-weight: 200;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 10% 1fr 10%;
+    gap: 0px 0px;
+    grid-template-areas:
+    ". head ."
+    ". cons ."
+    ". foot .";
 }
 
-#console{
+.cons {
     display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
-    grid-column: 1fr;
-    grid-row-gap: 10px;
-    height: auto;
-    width: 30em;
-    margin:0;
-}
-#console > label{
-    color: #000000;
-    height: 1em;
-    width: 4em;;
-    background-color: #FFFFFF;
-}
-#console > textarea, input{
-    background-color: inherit;
-    color: #FFFFFF;
-    text-align: left;
-    background: Transparent;
-    font-weight: 200;
-    border: none;
-    resize: none;
-}
-#header{
-    font-size: 3em;
-}
-/*
-header,footer,res{
-    background-color: inherit;
-    color: #FFFFFF;
-    text-align: center;
-    background: Transparent;
-    font-weight: 200;
-}
-cons{
-    display: grid;
-    grid-template:
-        "label"
-        "textarea"
-        "input";
-    grid-template-rows: 2em 20em 2em;
-    grid-row-gap: 10px;
-    height: 100vh;
-    width: 30em;
-    margin: 0;
-    background-color: inherit;
-    color: #FFFFFF;
-    text-align: center;
-    background: Transparent;
-    font-weight: 200;
-}
-#pageHeader{
-    grid-area: header;
-    font-size: 3em;
-}
-#pageFooter{
-    grid-area: footer;
-}
-#mainCons{
+    grid-template-columns: 10% 1fr 10%;
+    grid-template-rows: 10% repeat(2, 1fr);
+    gap: 0px 0px;
+    grid-template-areas:
+    ". curarea ."
+    ". console ."
+    ". res .";
     grid-area: cons;
-}
-#mainRes{
-    grid-area: res;
-}
-#curarea{
-    grid-area: label;
-}
-#conout{
-    grid-area: textarea;
-    height: 20em;
-    background: inherit;
-    color: inherit;
-    border: none;
-    font-weight: inherit;
-    font: inherit;
-    resize: none;
-}
-#conin{
-    grid-area: input;
-    background: inherit;
-    color: inherit;
-    border: none;
-    font-weight: inherit;
-    font: inherit;
+    text-align: center;
+    color: #FFFFFF;
 }
 
-@media all and (max-width: 100%){
-    body{
-        grid-template-areas:
-            "header"
-            "cons"
-            "res"
-            "footer";
-        grid-template-rows: 10% 35% 35% 10%;
-        grid-template-columns: 1fr;
-    }
-    cons{
-        grid-template-areas:
-            "label"
-            "textarea"
-            "input";
-        grid-template-rows: 2em 20em 2em;
-        grid-template-columns: 1fr;
-    }
+.curarea{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0px 0px;
+    grid-template-areas:
+        ". . . . ."
+        ". . . . ."
+        ". . . . ."
+        "calbl . . . .";
+    grid-area: curarea;
+}
+.calbl{
+    background-color: #FFFFFF;
+    color: #000000;
+    grid-area: calbl;
+}
+.console {
+    display: block;
+    grid-area: console;
+    resize: none;
+    height: 100%;
+    width: 100%;
+    background-color: inherit;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+.res {
+    grid-area: res;
+    text-align: center;
+    color: #FFFFFF;
+    visibility: hidden;
+}
+
+.head{
+    grid-area: head;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 60px;
+}
+
+.foot{
+    grid-area: foot;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/*show borders for testing*/
+/*
+.gc * {
+    border: 1px solid #FFFFFF;
+    position: relative;
 }*/
