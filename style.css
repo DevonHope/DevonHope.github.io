@@ -58,7 +58,9 @@ body,html,.gc{
     width: 100%;
     background-color: inherit;
     color: #FFFFFF;
-    border: 1px solid #FFFFFF;
+    /*border: 1px solid #FFFFFF;*/
+    border: none;
+    font-size: 18px;
 }
 
 .res {
