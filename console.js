@@ -149,19 +149,26 @@ var respages = {
             }, 'Racing Simulator': {
                 'desc': 'A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.',
                 'status':'complete'
-            }, 'PC Builds': {
+            }
+        }
+    }, 'EDUCATION': {
+
+    }
+}
+
+/*
+  'PC Builds': {
                 'Sharky': {
                     'desc': {
                         'CPU': 'AMD Ryzen 7 3800x',
-                        'CPU Cooler':''
+                        'CPU Cooler':'Noctua NH-L12s'
                     }
                 }, 'Walter White': {
-                    
+
                 }
             }
-        }
-    }
-}
+ */
+
 
 //setup process
 function setup(){
@@ -229,7 +236,7 @@ function res() {
     var ca = document.getElementById('calbl').innerHTML;
     if (destinations.some(substring => ca.includes(substring))) {
         if (ca === destinations[3]) {
-            window.open('https://imgur.com/t/memes');
+            window.open('https://imgur.com/t/memes','_black');
         } else if (ca === destinations[0]) {
             //open projects in res div
 
