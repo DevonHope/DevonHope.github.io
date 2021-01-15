@@ -22,10 +22,11 @@ var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to d
 //bools for varisou things
 var readbool = false;
 //figure out how to do this
-var probool = false;
-var workbool = false;
-var edubool = false;
-var memebool = false;
+var PROJECTS = false;
+var WORK = false;
+var EDUCATION = false;
+var MEMES = false;
+var pgbool = [PROJECTS, WORK, EDUCATION, MEMES];
 
 var helpdisc = 'Use \'help\' to display commands.';
 
@@ -155,7 +156,7 @@ function cmdloop() {
         value = 'Already downloaded.';
     } else if (rval !== false) {
         value = desc(rval);
-    } else {
+    } else if (! rval){
         value = 'Command not recognized, use \'help\' to print usable commands.';
     }
 
@@ -198,6 +199,8 @@ function download() {
     link.dispatchEvent(new MouseEvent('click'));
 }
 
+var dsarr = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
+
 function desc(inp) {
     var val;
     var ca = document.getElementById('calbl');
@@ -205,6 +208,7 @@ function desc(inp) {
         if (ca.innerHTML === area) {
             for (dir in descdict[area]) {
                 if (inp === dir) {
+                    //handle lowercase destinations
                     if (descdict[area][dir].match(/[a-z]/)) {
                         val = destidict[descdict[area][dir]];
                         if (descdict[area][dir] === 'rh') {
@@ -214,11 +218,30 @@ function desc(inp) {
                         }
                         return val;
                     } else {
-                        val = destidict[descdict[area][dir]];
+                        //handle first time visits to each destination
+                        if (!PROJECTS || !WORK || !EDUCATION || !MEMES) {
+                            if (descdict[area][dir] === 'PROJECTS' && !PROJECTS) {
+                                PROJECTS = true;
+                                val = lkdict['PROJECTS'];
+                            } else if (descdict[area][dir] === 'WORK' && !WORK) {
+                                WORK = true;
+                                val = lkdict['WORK'];
+                            } else if (descdict[area][dir] === 'EDUCATION' && !EDUCATION) {
+                                EDUCATION = true;
+                                val = lkdict['EDUCATION'];
+                            } else if (descdict[area][dir] === 'MEMES' && !MEMES) {
+                                MEMES = true;
+                                val = lkdict['MEMES'];
+                            } else {
+                                val = destidict[descdict[area][dir]];
+                            }
+                        } else {
+                            val = destidict[descdict[area][dir]];
+                        }
                         ca.innerHTML = descdict[area][dir];
                         return val;
-                    }
-                } 
+                    }   
+                }
             }
         }
     }
