@@ -22,12 +22,41 @@ var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to d
 //bools for varisou things
 var readbool = false;
 //figure out how to do this
-var northbool = false;
-var southhbool = false;
-var westbool = false;
-var eastbool = false;
+var probool = false;
+var workbool = false;
+var edubool = false;
+var memebool = false;
 
 var helpdisc = 'Use \'help\' to display commands.';
+
+var lkdict = {
+    'HOME': 'You are standing in the main foyer of the Home.\
+            \nTo the North is the hall of Projects.\
+            \nTo the West is the office of Work.\
+            \nTo the East is the den of Education.\
+            \nTo the South is the library of Memes.',
+    'PROJECTS': 'You are gazing in the hall of Projects.\
+              \nTo the South is the main foyer of the Home.\
+              \nTo the West is the office of Work.\
+              \nTo the East is the den of Education.\
+              \nTo the North is a wall.',
+    'WORK': 'You are focused in the office of Work.\
+            \nTo the North is the hall of Projects.\
+            \nTo the West is a window.\
+            \nTo the East is the main foyer of the Home.\
+            \nTo the South is the library of Memes.',
+    'EDUCATION': 'You are sitting in the den of Education.\
+            \nTo the North lies the hall of Projects.\
+            \nTo the West is the main foyer of the Home.\
+            \nTo the East is another wall, with a small crack.\
+            \nTo the South is the library of Memes.',
+    'MEMES': 'You are standing in the library of Memes.\
+            \nTo the North lies the main foyer of the Home.\
+            \nTo the West is the office of Work.\
+            \nTo the East is the den of Education.\
+            \nTo the South is half eaten sandwich on an endtable.'
+
+};
 
 var homelk = 'You are standing in the main foyer of the Home.\
             \nTo the North is the hall of Projects.\
@@ -118,7 +147,7 @@ function setup(){
     var inp = document.getElementById('in');
     //set console start output
 
-    cons.value = intro+"\n\n"+homelk+"\n"+readdisc+"\n\n"+helpdisc;
+    cons.value = intro+"\n\n"+lkdict['homelk']+"\n"+readdisc+"\n\n"+helpdisc;
     curarea.innerHTML = 'HOME';
     arlbl.innerHTML = '>';
     inp.value = '';
@@ -185,16 +214,10 @@ function val(inp) {
 
 function lookat() {
     var ca = document.getElementById('calbl').innerHTML;
-    if (ca === 'HOME') {
-        return homelk;
-    } else if (ca === 'WORK') {
-        return worklk;
-    } else if (ca === 'PROJECTS') {
-        return projlk;
-    } else if (ca === 'EDUCATION') {
-        return edulk;
-    } else if (ca === 'MEMES') {
-        return memelk;
+    for (n in lkdict) {
+        if (ca === n) {
+            return lkdict[n];
+        }
     }
 }
 
@@ -209,14 +232,10 @@ function desc(inp) {
     var val;
     var ca = document.getElementById('calbl');
     for (area in descdict) {
-        console.log("area: "+area);
         if (ca.innerHTML === area) {
-            console.log("descdict[area]: "+descdict[area]);
             for (dir in descdict[area]) {
-                console.log("dir: " + dir);
                 if (inp === dir) {
                     if (descdict[area][dir].match(/[a-z]/)) {
-                        console.log("descdict[area][dir]: " + descdict[area][dir]);
                         val = destidict[descdict[area][dir]];
                         if (descdict[area][dir] === 'rh') {
                             ca.innerHTML = 'HOME';
@@ -225,7 +244,6 @@ function desc(inp) {
                         }
                         return val;
                     } else {
-                        console.log("descdict[area][dir]: " + descdict[area][dir]);
                         val = destidict[descdict[area][dir]];
                         ca.innerHTML = descdict[area][dir];
                         return val;
