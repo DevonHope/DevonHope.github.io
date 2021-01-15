@@ -92,7 +92,14 @@ body,html,.gc{
     color: inherit;
     border: none;
     outline: none;
+    font-family:inherit;
+    font-size:18px;
     grid-area: in;
+}
+
+in:focus{
+    outline:none;
+    background-color:#000000;
 }
 
 .res {
