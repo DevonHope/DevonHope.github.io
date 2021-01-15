@@ -21,20 +21,40 @@ body,html,.gc{
 
 .cons {
     display: grid;
-    grid-template-columns: 10% 1fr 10%;
+    grid-template-columns: 5% 1fr 5%;
     grid-template-rows: 10% 1fr 20px 1fr;
     gap: 0px 0px;
     grid-template-areas:
-    ". curarea ."
-    ". console ."
-    ". in ."
-    ". res .";
+        ". curarea ."
+        ". console ."
+        ". inputarea ."
+        ". res .";
     grid-area: cons;
     text-align: center;
     color: #FFFFFF;
     font-size: 18px;
 }
 
+.inputarea{
+    display: grid;
+    grid-template-columns: 5% 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "arlbl in";
+    grid-area: inputarea;
+}
+
+.arlbl{
+    grid-area: arlbl;
+    font-size: 18px;
+    background-color: inherit;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+}
+
+/*current area label*/
 .curarea{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -52,6 +72,7 @@ body,html,.gc{
     color: #000000;
     grid-area: calbl;
 }
+
 .console {
     display: block;
     grid-area: console;
@@ -63,12 +84,14 @@ body,html,.gc{
     /*border: 1px solid #FFFFFF;*/
     border: none;
     font-size: 18px;
+    outline: none;
 }
 
 .in{
     background-color: inherit;
     color: inherit;
     border: none;
+    outline: none;
     grid-area: in;
 }
 
