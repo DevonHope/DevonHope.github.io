@@ -19,25 +19,51 @@ var intro = 'Welcome to the house of Devon Hopes resume.\
             \n\nRead the explanations carefully and decide which direction to move in. Each direction leads to a new section of the resume.';
 
 var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to download.';
+//bools for varisou things
 var readbool = false;
+//figure out how to do this
+var northbool = false;
+var southhbool = false;
+var westbool = false;
+var eastbool = false;
 
 var helpdisc = 'Use \'help\' to display commands.';
 
 var homelk = 'You are standing in the main foyer of the Home.\
-            \nTo the North lies the hall of Projects.\
+            \nTo the North is the hall of Projects.\
             \nTo the West is the office of Work.\
             \nTo the East is the den of Education.\
             \nTo the South is the library of Memes.';
 
-var projlk = '';
+var projlk = 'You are gazing in the hall of Projects.\
+              \nTo the South is the main foyer of the Home.\
+              \nTo the West is the office of Work.\
+              \nTo the East is the den of Education.\
+              \nTo the North is a wall.';
 
-var worklk = '';
+var worklk = 'You are focused in the office of Work.\
+            \nTo the North is the hall of Projects.\
+            \nTo the West is a window.\
+            \nTo the East is the main foyer of the Home.\
+            \nTo the South is the library of Memes.';
 
-var edulk = '';
+var edulk = 'You are sitting in the den of Education.\
+            \nTo the North lies the hall of Projects.\
+            \nTo the West is the main foyer of the Home.\
+            \nTo the East is another wall, with a small crack.\
+            \nTo the South is the library of Memes.';
 
-var memelk = '';
+var memelk = 'You are standing in the library of Memes.\
+            \nTo the North lies the main foyer of the Home.\
+            \nTo the West is the office of Work.\
+            \nTo the East is the den of Education.\
+            \nTo the South is half eaten sandwich on an endtable.';
 
-var map = 'this will be a map';
+var map = '...........-----PROJECTS-----............\
+           .......-------------------------.........\
+           .....------------------------------......\
+           \n---WORK-------HOME------EDUCATION-\
+            \n-------------MEMES----------------';
 
 //setup process
 function setup(){
@@ -74,8 +100,7 @@ function cmdloop() {
     if (rval.includes('help')) {
         value = helpstr;
     } else if (rval.includes('look')) {
-        console.log('inside look');
-        value = look();
+        value = lookat();
     } else if (rval.includes('map')) {
         value = map;
     } else if (rval.includes('read') && !readbool) {
@@ -113,10 +138,9 @@ function val(inp) {
     }
 }
 
-function look(){
-    var ca = document.getElementById('calbl').value;
+function lookat() {
+    var ca = document.getElementById('calbl').innerHTML;
     if (ca === 'HOME') {
-        console.log('inside look()');
         return homelk;
     } else if (ca === 'WORK') {
         return worklk;
@@ -159,7 +183,7 @@ function home(inp){
     if (inp.includes('north')) {
         value = "You have entered the hall of Projects."
         curarea.innerHTML = 'PROJECTS';
-    }else if (inp.includes('south')) {
+    } else if (inp.includes('south')) {
         value = "You have entered the library of Memes."
         curarea.innerHTML = 'MEMES';
     }else if (inp.includes('east')) {
