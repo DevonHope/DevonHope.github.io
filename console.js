@@ -26,7 +26,6 @@ var PROJECTS = false;
 var WORK = false;
 var EDUCATION = false;
 var MEMES = false;
-var pgbool = [PROJECTS, WORK, EDUCATION, MEMES];
 
 var helpdisc = 'Use \'help\' to display commands.';
 
@@ -59,15 +58,15 @@ var lkdict = {
 
 };
 
-var map = '..............--PROJECTS--...........\
-           ..........-------------------...........\
-           .......------------------------.........\
-           .....----------------------------......\
-           ....WORK----------HOME---EDUCATION....\
-           .....----------------------------......\
-           .......-------------------------.........\
-           ..........--------------------...........\
-           ...............--MEMES--.................';
+var map = '...........-P-..........\
+           \n........--------........\
+           \n.....--------------.....\
+           \n..--------------------..\
+           \n-W----------H---------E-\
+           \n..--------------------..\
+           \n.....--------------.....\
+           \n........--------........\
+           \n...........-M-..........';
 
 var destidict = {
     "PROJECTS": "You have entered the hall of Projects.",
@@ -142,7 +141,9 @@ function cmdloop() {
     //choices
     var rval = val(inp);
     var value = "";
-    if (rval.includes('help')) {
+    if (!rval) {
+        value = 'Command not recognized, use \'help\' to print usable commands.';
+    }else if (rval.includes('help')) {
         value = helpstr;
     } else if (rval.includes('look')) {
         value = lookat();
@@ -156,12 +157,10 @@ function cmdloop() {
         value = 'Already downloaded.';
     } else if (rval !== false) {
         value = desc(rval);
-    } else if (! rval){
-        value = 'Command not recognized, use \'help\' to print usable commands.';
-    }
+    } 
 
     //add returned values to consout
-    var newcons = cons.value +"\n\n> "+ rval+"\n\n"+value;
+    var newcons = cons.value + "\n\n> " + inp.value + "\n\n" + value;
     cons.value = newcons;
     //set scroll bar to bottom
     cons.scrollTop = cons.scrollHeight;
@@ -172,9 +171,11 @@ function cmdloop() {
 function val(inp) {
     var linp = inp.value.toLowerCase();
     linp = linp.replace(/[^0-9a-z]/gi, '');
+    console.log(linp);
     if (directions.some(substring => linp.includes(substring))) {
         if (linp.includes('go')) {
-            return linp.split(' ')[1];
+            var v = linp.split('go')[1];
+            return v;
         } else {
             return linp;
         }
@@ -198,8 +199,6 @@ function download() {
     link.download = 'DevonHope_Resume.pdf';
     link.dispatchEvent(new MouseEvent('click'));
 }
-
-var dsarr = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
 
 function desc(inp) {
     var val;
