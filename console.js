@@ -15,7 +15,7 @@ var helpstr = 'HELP - Commands\
                     \n\'read\': to download my resume\
                     \n\'help\': to display this help page';
 
-var intro = 'Welcome to the house of Devon Hopes resume.\
+var intro = 'Welcome to the house of Devon Hope\'s resume.\
             \n\nRead the explanations carefully and decide which direction to move in. Each direction leads to a new section of the resume.';
 
 var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to download.';
@@ -28,6 +28,8 @@ var EDUCATION = false;
 var MEMES = false;
 
 var helpdisc = 'Use \'help\' to display commands.';
+
+var destinations = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
 
 var lkdict = {
     'HOME': 'You are standing in the main foyer of the Home.\
@@ -109,6 +111,58 @@ var descdict = {
     }
 };
 
+//format of resuts pages
+var respages = {
+    'PROJECTS': {
+        'Software Dev': {
+            'DevonHope.github.io': {
+                'desc': 'A website to promote and display my educational, professional and personal experience through a small text based adventure game.',
+                'status': 'in development',
+                'link': 'https://devonhope.github.io/'
+            }, 'Bookstore-Webapp': {
+                'desc': 'A bookstore of sorts aimed at providing a community based website to share digital copies of books, only accessible through a QR code that would be stapled in said community. Languages: PostGreSQL, python, latex, css, html, js',
+                'status': 'in development',
+                'link': 'https://github.com/DevonHope/Online-Bookstore-Webapp'
+            }, 'pdfcombine': {
+                'desc': 'Python script, originally a latex script, to combine all pdfs in a given folder.',
+                'status': 'complete',
+                'link': 'https://github.com/DevonHope/pdfcombine'
+            }, 'Python-CSV-Parser': {
+                'desc': 'A python script to parse csv given in a specific format, can be modified for any format.',
+                'status': 'complete',
+                'link': 'https://github.com/DevonHope/Python_CSV_Parser'
+            }, 'Meme-to-CC': {
+                'desc': 'A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.',
+                'status': 'roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.',
+                'link': 'https://github.com/DevonHope/Meme-to-CC'
+            }
+        }, 'Hardware Integration Development': {
+            'Smart Home Monitoring System': {
+                'desc': 'A DIY smart home montioring system, comprised of three externerl cameras,\
+                        two external door senors and a central computer used to process the \
+                        information and handle events. The computer is a Raspberry PI 3, \
+                        running custom adaptations of a linux apache server to communicate with the devices.',
+                'status':'in development, 2 cameras and 2 door sensors are operational'
+            }, 'Custom Ad-blocking Pi-hole': {
+                'desc': 'A raspberry pi running a modified version of the latest Pi-hole software to block specific apps and ads from accessing a home network.',
+                'status':'in development: All device ad-blocking is operational, all device app blocking is not.'
+            }, 'Racing Simulator': {
+                'desc': 'A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.',
+                'status':'complete'
+            }, 'PC Builds': {
+                'Sharky': {
+                    'desc': {
+                        'CPU': 'AMD Ryzen 7 3800x',
+                        'CPU Cooler':''
+                    }
+                }, 'Walter White': {
+                    
+                }
+            }
+        }
+    }
+}
+
 //setup process
 function setup(){
     var cons = document.getElementById('consout');
@@ -165,6 +219,22 @@ function cmdloop() {
     //set scroll bar to bottom
     cons.scrollTop = cons.scrollHeight;
     inp.value = '';
+
+    //open the results pages
+    res();
+}
+
+//results page function
+function res() {
+    var ca = document.getElementById('calbl').innerHTML;
+    if (destinations.some(substring => ca.includes(substring))) {
+        if (ca === destinations[3]) {
+            window.open('https://imgur.com/t/memes');
+        } else if (ca === destinations[0]) {
+            //open projects in res div
+
+        }
+    }
 }
 
 //validate input string
