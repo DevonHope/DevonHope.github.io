@@ -58,36 +58,6 @@ var lkdict = {
 
 };
 
-var homelk = 'You are standing in the main foyer of the Home.\
-            \nTo the North is the hall of Projects.\
-            \nTo the West is the office of Work.\
-            \nTo the East is the den of Education.\
-            \nTo the South is the library of Memes.';
-
-var projlk = 'You are gazing in the hall of Projects.\
-              \nTo the South is the main foyer of the Home.\
-              \nTo the West is the office of Work.\
-              \nTo the East is the den of Education.\
-              \nTo the North is a wall.';
-
-var worklk = 'You are focused in the office of Work.\
-            \nTo the North is the hall of Projects.\
-            \nTo the West is a window.\
-            \nTo the East is the main foyer of the Home.\
-            \nTo the South is the library of Memes.';
-
-var edulk = 'You are sitting in the den of Education.\
-            \nTo the North lies the hall of Projects.\
-            \nTo the West is the main foyer of the Home.\
-            \nTo the East is another wall, with a small crack.\
-            \nTo the South is the library of Memes.';
-
-var memelk = 'You are standing in the library of Memes.\
-            \nTo the North lies the main foyer of the Home.\
-            \nTo the West is the office of Work.\
-            \nTo the East is the den of Education.\
-            \nTo the South is half eaten sandwich on an endtable.';
-
 var map = '..............--PROJECTS--...........\
            ..........-------------------...........\
            .......------------------------.........\
@@ -147,7 +117,7 @@ function setup(){
     var inp = document.getElementById('in');
     //set console start output
 
-    cons.value = intro+"\n\n"+lkdict['homelk']+"\n"+readdisc+"\n\n"+helpdisc;
+    cons.value = intro+"\n\n"+lkdict['HOME']+"\n"+readdisc+"\n\n"+helpdisc;
     curarea.innerHTML = 'HOME';
     arlbl.innerHTML = '>';
     inp.value = '';
