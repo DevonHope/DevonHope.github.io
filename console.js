@@ -24,10 +24,10 @@ var readbool = false;
 var helpdisc = 'Use \'help\' to display commands.';
 
 var homelk = 'You are standing in the main foyer of the Home.\
-            To the North lies the hall of Projects.\
-            To the West is the office of Work.\
-            To the East is the den of Education.\
-            To the South is the library of Memes.';
+            \nTo the North lies the hall of Projects.\
+            \nTo the West is the office of Work.\
+            \nTo the East is the den of Education.\
+            \nTo the South is the library of Memes.';
 
 var projlk = '';
 
@@ -47,7 +47,7 @@ function setup(){
     var inp = document.getElementById('in');
     //set console start output
 
-    cons.value = intro+"\n\n"+homelk+readdisc+"\n\n"+helpdisc;
+    cons.value = intro+"\n\n"+homelk+"\n"+readdisc+"\n\n"+helpdisc;
     curarea.innerHTML = 'HOME';
     arlbl.innerHTML = '>';
     inp.value = '';
@@ -78,9 +78,12 @@ function cmdloop() {
         value = look();
     } else if (rval.includes('map')) {
         value = map;
-    }else if (rval.includes('read')) {
+    } else if (rval.includes('read') && !readbool) {
         download();
         value = 'Downloaded.';
+        readbool = true;
+    } else if (rval.includes('read') && readbool) {
+        value = 'Already downloaded.';
     } else if (rval !== false) {
         value = maindesc(rval);
     } else {
