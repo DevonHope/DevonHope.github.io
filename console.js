@@ -152,6 +152,14 @@ var respages = {
             }
         }
     }, 'EDUCATION': {
+        'Carleton University': {
+            'Degree': 'Computer Science',
+            'from':'2016 - 2021'
+        }, 'Holy Trinity School': {
+            'Degree': 'Highschool Disploma',
+            'from':'2012-2016'
+        }
+    }, 'WORK': {
 
     }
 }
