@@ -69,6 +69,47 @@ var map = '..............--PROJECTS--...........\
            ..........--------------------...........\
            ...............--MEMES--.................';
 
+var destidict = {
+    "PROJECTS": "You have entered the hall of Projects.",
+    "MEMES": "You have entered the library of Memes.",
+    "EDUCATION": "You have entered the den of Education.",
+    "WORK": "You have entered the office of Work.",
+    "rh": "You have returned to the foyer of the Home.",
+    "den": "I too wish to walk through walls.",
+    "dew": "That is a wall.",
+    "dee": "There is a window here, you can see a bird (chirp-chirp).",
+    "des": "You cannot go through walls."
+};
+
+var descdict = {
+    "HOME": {
+        "north": "PROJECTS",
+        "west": "WORK",
+        "east": "EDUCATION",
+        "south": "MEMES"
+    }, "PROJECTS": {
+        "north": "den",
+        "west": "WORK",
+        "east": "EDUCATION",
+        "south": "rh"
+    }, "WORK": {
+        "north": "PROJECTS",
+        "west": "dew",
+        "east": "rh",
+        "south": "MEMES"
+    }, "EDUCATION": {
+        "north": "PROJECTS",
+        "west": "rh",
+        "east": "dee",
+        "south": "MEMES"
+    }, "MEMES": {
+        "north": "rh",
+        "west": "WORK",
+        "east": "EDUCATION",
+        "south": "des"
+    }
+};
+
 //setup process
 function setup(){
     var cons = document.getElementById('consout');
@@ -114,7 +155,7 @@ function cmdloop() {
     } else if (rval.includes('read') && readbool) {
         value = 'Already downloaded.';
     } else if (rval !== false) {
-        value = maindesc(rval);
+        value = desc(rval);
     } else {
         value = 'Command not recognized, use \'help\' to print usable commands.';
     }
@@ -164,110 +205,33 @@ function download() {
     link.dispatchEvent(new MouseEvent('click'));
 }
 
-function maindesc(inp){
-    var curar = document.getElementById('calbl');
-    var val = "";
-    if (curar.innerHTML === 'HOME') {
-        val = home(inp);
-    } else if (curar.innerHTML === 'PROJECTS') {
-        val = project(inp);
-    } else if (curar.innerHTML === 'WORK') {
-        val = work(inp);
-    } else if (curar.innerHTML === 'EDUCATION') {
-        val = education(inp);
-    } else if (curar.innerHTML === 'MEMES') {
-        val = memes(inp);
+function desc(inp) {
+    var val;
+    var ca = document.getElementById('calbl');
+    for (area in descdict) {
+        console.log("area: "+area);
+        if (ca.innerHTML === area) {
+            console.log("descdict[area]: "+descdict[area]);
+            for (dir in descdict[area]) {
+                console.log("dir: " + dir);
+                if (inp === dir) {
+                    if (descdict[area][dir].match(/[a-z]/)) {
+                        console.log("descdict[area][dir]: " + descdict[area][dir]);
+                        val = destidict[descdict[area][dir]];
+                        if (descdict[area][dir] === 'rh') {
+                            ca.innerHTML = 'HOME';
+                        } else {
+                            ca.innerHTML = area;
+                        }
+                        return val;
+                    } else {
+                        console.log("descdict[area][dir]: " + descdict[area][dir]);
+                        val = destidict[descdict[area][dir]];
+                        ca.innerHTML = descdict[area][dir];
+                        return val;
+                    }
+                } 
+            }
+        }
     }
-    return val;
-}
-
-function home(inp){
-    var value = "";
-    var curarea = document.getElementById('calbl');
-    if (inp.includes('north')) {
-        value = "You have entered the hall of Projects."
-        curarea.innerHTML = 'PROJECTS';
-    } else if (inp.includes('south')) {
-        value = "You have entered the library of Memes."
-        curarea.innerHTML = 'MEMES';
-    }else if (inp.includes('east')) {
-        value = "You have entered the den of Education."
-        curarea.innerHTML = 'EDUCATION';
-    } else if (inp.includes('west')) {
-        value = "You have entered the office of Work."
-        curarea.innerHTML = 'WORK';
-    }
-    return value;
-}
-
-function project(inp) {
-    var value = "";
-    var curarea = document.getElementById('calbl');
-    if (inp.includes('north')) {
-        value = "I too wish to walk through walls."
-    } else if (inp.includes('south')) {
-        value = "You have returned to the foyer of the Home."
-        curarea.innerHTML = 'HOME';
-    } else if (inp.includes('easst')) {
-        value = "You have entered the den of Education."
-        curarea.innerHTML = 'EDUCATION';
-    } else if (inp.includes('west')) {
-        value = "You have entered the office of Work."
-        curarea.innerHTML = 'WORK';
-    }
-    return value;
-}
-
-function work(inp) {
-    var value = "";
-    var curarea = document.getElementById('calbl');
-    if (inp.includes('north')) {
-        value = "You have entered the hall of Projects."
-        curarea.innerHTML = 'PROJECTS';
-    } else if (inp.includes('south')) {
-        value = "You have entered the library of Memes."
-        curarea.innerHTML = 'MEMES';
-    } else if (inp.includes('east')) {
-        value = "You have returned to the foyer of the Home."
-        curarea.innerHTML = 'HOME';
-    } else if (inp.includes('west')) {
-        value = "That is a wall."
-    }
-    return value;
-}
-
-function education(inp) {
-    var value = "";
-    var curarea = document.getElementById('calbl');
-    if (inp.includes('north')) {
-        value = "You have entered the hall of Projects."
-        curarea.innerHTML = 'PROJECTS';
-    } else if (inp.includes('south')) {
-        value = "You have entered the library of Memes."
-        curarea.innerHTML = 'MEMES';
-    } else if (inp.includes('east')) {
-        value = "There is a window here, you can see a bird (chirp-chirp)."
-    } else if (inp.includes('west')) {
-        value = "You have returned to the foyer of the Home."
-        curarea.innerHTML = 'HOME';
-    }
-    return value;
-}
-
-function memes(inp) {
-    var value = "";
-    var curarea = document.getElementById('calbl');
-    if (inp.includes('north')) {
-        value = "You have returned to the foyer of the Home."
-        curarea.innerHTML = 'HOME';
-    } else if (inp.includes('south')) {
-        value = "You cannot go through walls."
-    } else if (inp.includes('east')) {
-        value = "You have entered the den of Education."
-        curarea.innerHTML = 'EDUCATION';
-    } else if (inp.includes('west')) {
-        value = "You have entered the office of Work."
-        curarea.innerHTML = 'WORK';
-    }
-    return value;
 }
