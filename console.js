@@ -111,72 +111,92 @@ var descdict = {
     }
 };
 
-//format of resuts pages
-var respages = {
+//all page info in html
+
+const inhtml = {
     'PROJECTS': {
-        'Software Dev': {
-            'DevonHope.github.io': {
-                'desc': 'A website to promote and display my educational, professional and personal experience through a small text based adventure game.',
-                'status': 'in development',
-                'link': 'https://devonhope.github.io/'
-            }, 'Bookstore-Webapp': {
-                'desc': 'A bookstore of sorts aimed at providing a community based website to share digital copies of books, only accessible through a QR code that would be stapled in said community. Languages: PostGreSQL, python, latex, css, html, js',
-                'status': 'in development',
-                'link': 'https://github.com/DevonHope/Online-Bookstore-Webapp'
-            }, 'pdfcombine': {
-                'desc': 'Python script, originally a latex script, to combine all pdfs in a given folder.',
-                'status': 'complete',
-                'link': 'https://github.com/DevonHope/pdfcombine'
-            }, 'Python-CSV-Parser': {
-                'desc': 'A python script to parse csv given in a specific format, can be modified for any format.',
-                'status': 'complete',
-                'link': 'https://github.com/DevonHope/Python_CSV_Parser'
-            }, 'Meme-to-CC': {
-                'desc': 'A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.',
-                'status': 'roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.',
-                'link': 'https://github.com/DevonHope/Meme-to-CC'
-            }
-        }, 'Hardware Integration Development': {
-            'Smart Home Monitoring System': {
-                'desc': 'A DIY smart home montioring system, comprised of three externerl cameras,\
-                        two external door senors and a central computer used to process the \
-                        information and handle events. The computer is a Raspberry PI 3, \
-                        running custom adaptations of a linux apache server to communicate with the devices.',
-                'status':'in development, 2 cameras and 2 door sensors are operational'
-            }, 'Custom Ad-blocking Pi-hole': {
-                'desc': 'A raspberry pi running a modified version of the latest Pi-hole software to block specific apps and ads from accessing a home network.',
-                'status':'in development: All device ad-blocking is operational, all device app blocking is not.'
-            }, 'Racing Simulator': {
-                'desc': 'A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.',
-                'status':'complete'
-            }
-        }
-    }, 'EDUCATION': {
-        'Carleton University': {
-            'Degree': 'Computer Science',
-            'from':'2016 - 2021'
-        }, 'Holy Trinity School': {
-            'Degree': 'Highschool Disploma',
-            'from':'2012-2016'
-        }
+        'html': `< label class="pagehead" > PROJECTS</label >
+                <div class="subhead">Software Dev</div>
+                <div class="subsub">DevonHope.github.io</div>
+                <div class="subsubsub">Description: A website to promote and display my educational, professional and personal experience through a small text based adventure game.</div>
+                <div class="subsubsub">Status: In development</div>
+                <div class="subsubsub">Link: <a href="https://devonhope.github.io/" target="_blank" rel="noopener noreferrer">https://devonhope.github.io/</a></div>
+
+                <div class="subsub">Bookstore-Webapp</div>
+                <div class="subsubsub">Description: A bookstore of sorts aimed at providing a community based website to share digital copies of books, only accessible through a QR code that would be stapled in said community. Languages: PostGreSQL, python, latex, css, html, js</div>
+                <div class="subsubsub">Status: In development</div>
+                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Online-Bookstore-Webapp" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Online-Bookstore-Webapp</a></div>
+
+                <div class="subsub">pdfcombine</div>
+                <div class="subsubsub">Description: Python script, originally a latex script, to combine all pdfs in a given folder.</div>
+                <div class="subsubsub">Status: Complete</div>
+                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/pdfcombine" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/pdfcombine</a></div>
+
+                <div class="subsub">Python-CSV-Parser</div>
+                <div class="subsubsub">Description: A python script to parse csv given in a specific format, can be modified for any format.</div>
+                <div class="subsubsub">Status: Complete</div>
+                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Python_CSV_Parser" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Python_CSV_Parser</a></div>
+
+                <div class="subsub">Meme-to-CC</div>
+                <div class="subsubsub">Description: A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.</div>
+                <div class="subsubsub">Status: roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.</div>
+                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Meme-to-CC" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Meme-to-CC</a></div>
+
+                <div class="subsub"></div>
+                <div class="subhead">Hardware Integration Development</div>
+                <div class="subsub">Smart Home Monitoring System</div>
+                <div class="subsubsub">
+                    Description: A DIY smart home montioring system, comprised of three externerl cameras,
+                    two external door senors and a central computer used to process the
+                    information and handle events. The computer is a Raspberry PI 3,
+                    running custom adaptations of a linux apache server to communicate with the devices.
+                </div>
+                <div class="subsubsub">Status: in development, 2 cameras and 2 door sensors are operational</div>
+
+                <div class="subsub">Custom Ad-blocking Pi-hole</div>
+                <div class="subsubsub">Description: A raspberry pi running a modified version of the latest Pi-hole software to block specific apps and ads from accessing a home network.</div>
+                <div class="subsubsub">Status: in development: All device ad-blocking is operational, all device app blocking is not.</div>
+
+                <div class="subsub">Racing Simulator</div>
+                <div class="subsubsub">Description: A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.</div>
+                <div class="subsubsub">Status: Complete</div>`,
+        'height':'2200px'
     }, 'WORK': {
+        'html': `<label class="pagehead">WORK</label>
+            <div class="subsub">The Source</div>
+            <div class="subsubsub">Position: Sales Rep</div>
+            <div class="subsubsub">From: 2019-2020</div>
 
+            <div class="subsub">Town of Aurora Summer Camp's</div>
+            <div class="subsubsub">Position: Camp counselor/swim insrtructor</div>
+            <div class="subsubsub">From: 2016-2018</div>
+
+            <div class="subsub">Town of Aurora Pools</div>
+            <div class="subsubsub">Position: Lifeguard/swim instructor</div>
+            <div class="subsubsub">From: 2015-2017</div>
+
+            <div class="subsub">Menchie's</div>
+            <div class="subsubsub">Position: Sales Rep</div>
+            <div class="subsubsub">From: 2015-2017</div>`,
+        'height':'1000px'
+    }, 'EDUCATION': {
+        'html': `<label class="pagehead">EDUCATION</label>
+            <div class="subsub">Carleton University</div>
+            <div class="subsubsub">Degree: Bachelor of Computer Science</div>
+            <div class="subsubsub">From: 2016-2021</div>
+
+            <div class="subsub">Holy Trinity School</div>
+            <div class="subsubsub">Degree: Highschol Diploma</div>
+            <div class="subsubsub">From: 2012-2016</div>
+
+            <div class="subhead"></div>
+            <div class="subhead">EXPERIENCES</div>
+            <div class="subsub">Carleton Hackathon Club</div>
+            <div class="subsubsub">Position: Co-internal Director</div>
+            <div class="subsubsub">From: 2017-2019</div>`,
+        'height':'1000px'
     }
-}
-
-/*
-  'PC Builds': {
-                'Sharky': {
-                    'desc': {
-                        'CPU': 'AMD Ryzen 7 3800x',
-                        'CPU Cooler':'Noctua NH-L12s'
-                    }
-                }, 'Walter White': {
-
-                }
-            }
- */
-
+}   
 
 //setup process
 function setup(){
@@ -240,15 +260,43 @@ function cmdloop() {
 }
 
 //results page function
+//for each page, the cons:height will have to be adjusted to fit properly
+var resid = 'innerres';
+
 function res() {
     var ca = document.getElementById('calbl').innerHTML;
+
+    //check if old div exists
+    if (document.getElementById(resid)) {
+        removediv();
+    }
+
+    //check if the curarea is not home
     if (destinations.some(substring => ca.includes(substring))) {
         if (ca === destinations[3]) {
-            window.open('https://imgur.com/t/memes','_black');
-        } else if (ca === destinations[0]) {
-            //open projects in res div
-            //document.getElementById('projects').style.display = 'inline-block';
+            window.open('https://imgur.com/t/memes', '_black');
+        } else {
+            //add the div
+            adddiv(ca);
         }
+    }
+}
+
+function adddiv(ca) {
+    const di = document.createElement('div');
+    di.id = resid;
+    for (i in inhtml) {
+        if (ca === i) {
+            di.innerHTML = inhtml[i]['html'];
+            document.getElementsByClassName('cons')[0].style.height = inhtml[i]['height'];
+        }
+    }
+}
+
+function removediv() {
+    if (document.getElementById(resid)) {
+        var element = document.getElementById(resid);
+        element.parentNode.removeChild(element);
     }
 }
 
