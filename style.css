@@ -200,7 +200,11 @@ in:focus{
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
+/*try using grids in 3x3
+    . . .
+    . . .
+    format
+    */
 .projects{
     display:none;
 }
