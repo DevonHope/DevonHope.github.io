@@ -190,6 +190,11 @@ in:focus{
     color: #FFFFFF;
 }
 
+/*for the color change of hyperlinks*/
+a {
+    color: #FFA584;
+}
+
 /*show borders for testing*/
 /*
 .gc * {

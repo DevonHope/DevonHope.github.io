@@ -138,8 +138,12 @@ body, html, .gc {
     }
 }
 
-
+/*for the color change of hyperlinks*/
+a {
+    color: #FFA584;
+}
+/*
 .gc * {
     border: 1px solid #FFFFFF;
     position: relative;
-}
+}*/
