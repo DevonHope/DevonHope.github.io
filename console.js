@@ -360,9 +360,9 @@ function desc(inp) {
 function menu(x) {
     x.classList.toggle("change");
     if (document.getElementById('mySidenav').style.width === '250px') {
-        closeNav();
+        document.getElementById("mySidenav").style.width = "0";
     } else {
-        openNav();
+        document.getElementById("mySidenav").style.width = "250px";
     }
     /*var side = document.getElementById('sideNav').style;
     if (side.width === '0') {
@@ -370,12 +370,4 @@ function menu(x) {
     } else {
         side.width = '0';
     }*/
-}
-
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
 }
