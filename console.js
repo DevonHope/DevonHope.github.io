@@ -247,7 +247,7 @@ function res() {
             window.open('https://imgur.com/t/memes','_black');
         } else if (ca === destinations[0]) {
             //open projects in res div
-            document.getElementById('projects').style.display = 'inline-block';
+            //document.getElementById('projects').style.display = 'inline-block';
         }
     }
 }
