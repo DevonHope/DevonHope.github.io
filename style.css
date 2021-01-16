@@ -93,9 +93,9 @@ body, html, .gc {
     grid-template-columns: 5% 1fr 5%;
     grid-template-rows: 10% 1fr 20px;
     gap: 0px 0px;
-    grid-template-areas: 
-        ". curarea ." 
-        ". console ." 
+    grid-template-areas:
+        ". curarea ."
+        ". console ."
         ". inputarea .";
     grid-area: containcons;
     padding-bottom:20px;
@@ -193,7 +193,7 @@ in:focus{
     grid-template-columns: 5% 1fr 5%;
     grid-template-rows: 1fr;
     gap: 0px 0px;
-    grid-template-areas: 
+    grid-template-areas:
         ". innerres .";
 }
 

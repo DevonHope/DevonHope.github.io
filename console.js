@@ -196,7 +196,7 @@ const inhtml = {
             <div class="subsubsub">From: 2017-2019</div>`,
         'height':'1000px'
     }
-}   
+}
 
 //setup process
 function setup(){
@@ -246,7 +246,7 @@ function cmdloop() {
         value = 'Already downloaded.';
     } else if (rval !== false) {
         value = desc(rval);
-    } 
+    }
 
     //add returned values to consout
     var newcons = cons.value + "\n\n> " + inp.value + "\n\n" + value;
@@ -295,6 +295,7 @@ function adddiv(ca) {
             di.innerHTML = inhtml[i]['html'];
             console.log('');
             document.getElementsByClassName('cons')[0].style.height = inhtml[i]['height'];
+            document.getElementsByClassName('cons')[0].style.paddingBottom = '30px';
             document.getElementById('res').appendChild(di);
             break;
         } else {
@@ -382,7 +383,7 @@ function desc(inp) {
                         }
                         ca.innerHTML = descdict[area][dir];
                         return val;
-                    }   
+                    }
                 }
             }
         }
