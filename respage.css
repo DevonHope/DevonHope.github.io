@@ -55,6 +55,13 @@ body, html, .gc {
     padding-bottom:5px;
 }
 
+.lisub{
+    text-align:left;
+    list-style:none;
+    font-size:15px;
+    font-weight:normal;
+}
+
 .head {
     grid-area: head;
     text-align: center;
