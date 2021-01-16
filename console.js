@@ -247,7 +247,33 @@ function res() {
             window.open('https://imgur.com/t/memes','_black');
         } else if (ca === destinations[0]) {
             //open projects in res div
-
+            var resdiv = document.getElementById('res');
+            var proj = document.createElement('div');
+            var title = document.createElement('label');
+            title.value = 'Projects';
+            for (page in respages) {//projects
+                if (page === 'PROJECTS') {
+                    var outerul = document.createElement('ul');
+                    for (devtype in page) {//software
+                        if (devtype === 'Software Dev') {
+                            var innerul = document.createElement('ul');
+                            for (pro in devtype) {//software projects
+                                var li = document.createElement('li');
+                                var inninnli = document.createElement('ul');
+                                li.innerHTML = pro;
+                                for (p in pro) {
+                                    var inli = document.createElement('li');
+                                    inli.innerHTML = pro[p];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            document.body.res.appendchild(ul);
+            //document.resdiv.appendchild(ul);
+            document.body.ul.appendchild(proj);
+            document.body.proj.appendchild(title);
         }
     }
 }
@@ -329,4 +355,27 @@ function desc(inp) {
             }
         }
     }
+}
+
+function menu(x) {
+    x.classList.toggle("change");
+    if (document.getElementById('mySidenav').style.width === '250px') {
+        closeNav();
+    } else {
+        openNav();
+    }
+    /*var side = document.getElementById('sideNav').style;
+    if (side.width === '0') {
+        side.width = '250px';
+    } else {
+        side.width = '0';
+    }*/
+}
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
