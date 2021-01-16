@@ -1,0 +1,109 @@
+﻿@import 'assets/ibm-plex/css/ibm-plex.css';
+body, html, .gc {
+    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    background-color: #000000;
+    height: 100%;
+    margin: auto;
+    color: #FFFFFF;
+}
+
+.gc {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 10% 1fr 10%;
+    gap: 0px 0px;
+    grid-template-areas: 
+        "container head ." 
+        "sidenav res ." 
+        ". foot .";
+}
+
+.res {
+    grid-area: res;
+    text-align: center;
+    color: #FFFFFF;
+    height:auto;
+}
+
+.head {
+    grid-area: head;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 60px;
+}
+
+.foot {
+    grid-area: foot;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.container {
+    grid-area: container;
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 40px;
+    padding-top: 20px;
+    position: fixed;
+    z-index: 999;
+}
+
+.bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #000000;
+    margin: 6px 0;
+    transition: 0.4s;
+    border: 1px solid #FFFFFF;
+}
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px);
+    transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 0;
+    background-color: #000000;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    grid-area: sidenav;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #FFFFFF;
+        display: block;
+        transition: 0.3s;
+    }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}

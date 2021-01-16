@@ -175,7 +175,6 @@ in:focus{
     grid-area: res;
     text-align: center;
     color: #FFFFFF;
-    visibility: hidden;
 }
 
 .head{
