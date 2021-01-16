@@ -359,15 +359,9 @@ function desc(inp) {
 
 function menu(x) {
     x.classList.toggle("change");
-    if (document.getElementById('mySidenav').style.width === '250px') {
+    if (document.getElementById('mySidenav').style.width === '200px') {
         document.getElementById("mySidenav").style.width = "0";
     } else {
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "200px";
     }
-    /*var side = document.getElementById('sideNav').style;
-    if (side.width === '0') {
-        side.width = '250px';
-    } else {
-        side.width = '0';
-    }*/
 }

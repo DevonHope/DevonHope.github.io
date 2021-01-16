@@ -1,6 +1,6 @@
 /*TEST CSS*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
-body,html,.gc{
+body, html, .gc {
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     background-color: #000000;
     height: 100%;
