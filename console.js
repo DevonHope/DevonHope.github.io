@@ -310,38 +310,6 @@ function removediv() {
     }
 }
 
-/*
-maybe use in future
-
-var resdiv = document.getElementById('res');
-            var proj = document.createElement('div');
-            var title = document.createElement('label');
-            title.value = 'Projects';
-            for (page in respages) {//projects
-                if (page === 'PROJECTS') {
-                    var outerul = document.createElement('ul');
-                    for (devtype in page) {//software
-                        if (devtype === 'Software Dev') {
-                            var innerul = document.createElement('ul');
-                            for (pro in devtype) {//software projects
-                                var li = document.createElement('li');
-                                var inninnli = document.createElement('ul');
-                                li.innerHTML = pro;
-                                for (p in pro) {
-                                    var inli = document.createElement('li');
-                                    inli.innerHTML = pro[p];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            document.body.res.appendchild(ul);
-            //document.resdiv.appendchild(ul);
-            document.body.ul.appendchild(proj);
-            document.body.proj.appendchild(title);
-*/
-
 //validate input string
 function val(inp) {
     var linp = inp.value.toLowerCase();
