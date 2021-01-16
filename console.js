@@ -115,7 +115,7 @@ var descdict = {
 
 const inhtml = {
     'PROJECTS': {
-        'html': `< label class="pagehead" > PROJECTS</label >
+        'html': `<label class="pagehead"> PROJECTS</label >
                 <div class="subhead">Software Dev</div>
                 <div class="subsub">DevonHope.github.io</div>
                 <div class="subsubsub">Description: A website to promote and display my educational, professional and personal experience through a small text based adventure game.</div>
@@ -285,10 +285,20 @@ function res() {
 function adddiv(ca) {
     const di = document.createElement('div');
     di.id = resid;
+    di.className = resid;
+    di.style.gridArea = 'innerres';
     for (i in inhtml) {
+        console.log('i: ' + i);
+        console.log('ca: '+ca);
         if (ca === i) {
+            console.log('inside');
             di.innerHTML = inhtml[i]['html'];
+            console.log('');
             document.getElementsByClassName('cons')[0].style.height = inhtml[i]['height'];
+            document.getElementById('res').appendChild(di);
+            break;
+        } else {
+            document.getElementsByClassName('cons')[0].style.height = '700px';
         }
     }
 }
