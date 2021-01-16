@@ -247,7 +247,15 @@ function res() {
             window.open('https://imgur.com/t/memes','_black');
         } else if (ca === destinations[0]) {
             //open projects in res div
-            var resdiv = document.getElementById('res');
+            document.getElementById('projects').style.display = 'inline-block';
+        }
+    }
+}
+
+/*
+maybe use in future
+
+var resdiv = document.getElementById('res');
             var proj = document.createElement('div');
             var title = document.createElement('label');
             title.value = 'Projects';
@@ -274,9 +282,7 @@ function res() {
             //document.resdiv.appendchild(ul);
             document.body.ul.appendchild(proj);
             document.body.proj.appendchild(title);
-        }
-    }
-}
+*/
 
 //validate input string
 function val(inp) {
