@@ -288,18 +288,12 @@ function adddiv(ca) {
     di.className = resid;
     di.style.gridArea = 'innerres';
     for (i in inhtml) {
-        console.log('i: ' + i);
-        console.log('ca: '+ca);
         if (ca === i) {
-            console.log('inside');
             di.innerHTML = inhtml[i]['html'];
-            console.log('');
             document.getElementsByClassName('cons')[0].style.height = inhtml[i]['height'];
             document.getElementsByClassName('cons')[0].style.paddingBottom = '30px';
             document.getElementById('res').appendChild(di);
             break;
-        } else {
-            document.getElementsByClassName('cons')[0].style.height = '700px';
         }
     }
 }
@@ -308,6 +302,7 @@ function removediv() {
     if (document.getElementById(resid)) {
         var element = document.getElementById(resid);
         element.parentNode.removeChild(element);
+        document.getElementsByClassName('cons')[0].style.height = '700px';
     }
 }
 
@@ -315,7 +310,6 @@ function removediv() {
 function val(inp) {
     var linp = inp.value.toLowerCase();
     linp = linp.replace(/[^0-9a-z]/gi, '');
-    console.log(linp);
     if (directions.some(substring => linp.includes(substring))) {
         if (linp.includes('go')) {
             var v = linp.split('go')[1];
