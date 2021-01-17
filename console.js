@@ -390,6 +390,32 @@ function desc(inp) {
     }
 }
 
+//close sidenav from anywhere
+//document.body.addEventListener('click', closeNav)
+
+/*
+document.addEventListener('click',function(e){
+    var snav = document.getElementById("mySidenav");
+    if (e.target.id !== snav.id && !snav.contains(e.target))
+        document.getElementById("mySidenav").style.width = "0";
+}, false);
+
+window.onclick = function(){
+    var sidenav = document.getElementById('mySidenav');
+    var sideNavWidth = sidenav.style.width;
+
+    // check to see if the event target was not the side nav
+    // AND that the side nav is open
+    if( event.target !== sidenav && sideNavWidth !== "0" ){
+        document.getElementById("mySidenav").style.width = "0";
+    }
+}*/
+
+function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+      }
+
 function menu(x) {
     x.classList.toggle("change");
     if (document.getElementById('mySidenav').style.width === '200px') {
