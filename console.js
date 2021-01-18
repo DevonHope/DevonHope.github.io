@@ -336,6 +336,7 @@ function download() {
     link.href = 'assets/DevonHope_Resume.pdf';
     link.download = 'DevonHope_Resume.pdf';
     link.dispatchEvent(new MouseEvent('click'));
+    readbool = true;
 }
 
 function desc(inp) {
@@ -376,8 +377,11 @@ function desc(inp) {
                             val = destidict[descdict[area][dir]];
                         }
                         ca.innerHTML = descdict[area][dir];
-                        return val;
                     }
+                    if(!readbool){
+                        val += "\n\n"+readdisc;
+                    }
+                    return val;
                 }
             }
         }
@@ -406,9 +410,9 @@ window.onclick = function(){
 }*/
 
 function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-      }
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
 
 function menu(x) {
     x.classList.toggle("change");
