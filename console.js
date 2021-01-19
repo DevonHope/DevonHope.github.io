@@ -411,7 +411,7 @@ window.onclick = function(){
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
+    //document.getElementById("main").style.marginLeft = "0";
 }
 
 function menu(x) {
