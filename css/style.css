@@ -19,6 +19,23 @@ body, html, .gc {
         ". foot .";
 }
 
+/*for 404.html*/
+.gc_er{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 10% 1fr 10%;
+    gap: 0px 0px;
+    grid-template-areas:
+        "container head ."
+        "sidenav error ."
+        ". foot .";
+}
+
+.error{
+    padding-top: 50px;
+    grid-area: error;
+}
+
 .container {
     grid-area: container;
     display: inline-block;
