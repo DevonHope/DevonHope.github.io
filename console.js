@@ -15,8 +15,8 @@ var helpstr = 'HELP - Commands\
                     \n\'read\': to download my resume\
                     \n\'help\': to display this help page';
 
-var intro = 'Welcome to the house of my resume.\
-            \n\nRead the explanations carefully and decide which direction to move in. Each direction leads to a new section of the resume.';
+var intro = 'Welcome to my website.\
+            \n\nRead the explanations carefully and decide which direction to move in. Each direction leads to a new section of the website.';
 
 var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to download.';
 //bools for varisou things
