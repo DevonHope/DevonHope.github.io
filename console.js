@@ -337,6 +337,9 @@ function download() {
     link.download = 'DevonHope_Resume.pdf';
     link.dispatchEvent(new MouseEvent('click'));
     readbool = true;
+
+    //launch mini game
+
 }
 
 function desc(inp) {
@@ -388,7 +391,13 @@ function desc(inp) {
     }
 }
 
-//close sidenav from anywhere
+// add background changing pixel art for each room, and adventure
+// add adventures
+function change_bg(area){
+    
+}
+
+// close sidenav from anywhere
 //document.body.addEventListener('click', closeNav)
 
 /*
