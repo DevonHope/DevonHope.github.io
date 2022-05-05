@@ -35,27 +35,27 @@ var lkdict = {
     'HOME': 'You are standing in the main foyer of the Home.\
             \nTo the North is the hall of Projects.\
             \nTo the West is the office of Work.\
-            \nTo the East is the den of Education.\
-            \nTo the South is the library of Memes.',
+            \nTo the East is the library of Education.\
+            \nTo the South is the den of Memes.',
     'PROJECTS': 'You are gazing in the hall of Projects.\
               \nTo the South is the main foyer of the Home.\
               \nTo the West is the office of Work.\
-              \nTo the East is the den of Education.\
+              \nTo the East is the library of Education.\
               \nTo the North is a wall.',
     'WORK': 'You are focused in the office of Work.\
             \nTo the North is the hall of Projects.\
             \nTo the West is a window.\
             \nTo the East is the main foyer of the Home.\
-            \nTo the South is the library of Memes.',
+            \nTo the South is the den of Memes.',
     'EDUCATION': 'You are sitting in the den of Education.\
             \nTo the North lies the hall of Projects.\
             \nTo the West is the main foyer of the Home.\
             \nTo the East is another wall, with a small crack.\
-            \nTo the South is the library of Memes.',
+            \nTo the South is the den of Memes.',
     'MEMES': 'You are standing in the library of Memes.\
             \nTo the North lies the main foyer of the Home.\
             \nTo the West is the office of Work.\
-            \nTo the East is the den of Education.\
+            \nTo the East is the library of Education.\
             \nTo the South is half eaten sandwich on an endtable.'
 
 };
