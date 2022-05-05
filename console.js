@@ -72,8 +72,8 @@ var map =   '...........-P-...........\
 
 var destidict = {
     "PROJECTS": "You have entered the hall of Projects.",
-    "MEMES": "You have entered the library of Memes.",
-    "EDUCATION": "You have entered the den of Education.",
+    "MEMES": "You have entered the den of Memes.",
+    "EDUCATION": "You have entered the library of Education.",
     "WORK": "You have entered the office of Work.",
     "rh": "You have returned to the foyer of the Home.",
     "den": "I too wish to walk through walls.",
