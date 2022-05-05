@@ -163,6 +163,10 @@ const inhtml = {
         'height':'2200px'
     }, 'WORK': {
         'html': `<label class="pagehead">WORK</label>
+            <div class="subsub">Haunted House Creations</div>
+            <div class="subsubsub">Position: CNC Machine Operator/3D Modeler/Product Designer</div>
+            <div class="subsubsub">From: 2022-Present</div>
+
             <div class="subsub">The Source</div>
             <div class="subsubsub">Position: Sales Rep</div>
             <div class="subsubsub">From: 2019-2020</div>
@@ -178,12 +182,12 @@ const inhtml = {
             <div class="subsub">Menchie's</div>
             <div class="subsubsub">Position: Sales Rep</div>
             <div class="subsubsub">From: 2015-2017</div>`,
-        'height':'1000px'
+        'height':'1300px'
     }, 'EDUCATION': {
         'html': `<label class="pagehead">EDUCATION</label>
             <div class="subsub">Carleton University</div>
             <div class="subsubsub">Degree: Bachelor of Computer Science</div>
-            <div class="subsubsub">From: 2016-2021</div>
+            <div class="subsubsub">From: 2016-2022</div>
 
             <div class="subsub">Holy Trinity School</div>
             <div class="subsubsub">Degree: Highschol Diploma</div>
@@ -394,7 +398,7 @@ function desc(inp) {
 // add background changing pixel art for each room, and adventure
 // add adventures
 function change_bg(area){
-    
+
 }
 
 // close sidenav from anywhere
