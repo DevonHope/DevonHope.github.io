@@ -248,6 +248,7 @@ function cmdloop() {
         readbool = true;
     } else if (rval.includes('read') && readbool) {
         value = 'Already downloaded.';
+        //ask if they want to download again
     } else if (rval !== false) {
         value = desc(rval);
     }
