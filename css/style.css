@@ -1,9 +1,10 @@
 /*TEST CSS*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
+
 body, html, .gc {
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     background-color: #000000;
-    height: 100%;
+    height: fit-content;
     margin: auto;
     color: #FFFFFF;
 }
@@ -16,7 +17,7 @@ body, html, .gc {
     grid-template-areas:
         "container head ."
         "sidenav cons ."
-        ". foot .";
+        "foot foot foot";
 }
 
 /*for 404.html*/
@@ -28,7 +29,7 @@ body, html, .gc {
     grid-template-areas:
         "container head ."
         "sidenav error ."
-        ". foot .";
+        "foot foot foot";
 }
 
 .error{
