@@ -1,8 +1,10 @@
 //js file for console input/output handeling
 
-var directions = ['north','south','west','east','help','read','look','map'];
+const resumePath = 'assets/DevonHope_resume.pdf'
 
-var helpstr = 'HELP - Commands\
+const directions = ['north','south','west','east','help','read','look','map'];
+
+const helpstr = 'HELP - Commands\
                     \n\nDirections:\
                     \nDesitinations are determined by your current position. Any direction can be prefaced with the term \'go\'\
                     \n\'south\'\
@@ -15,10 +17,10 @@ var helpstr = 'HELP - Commands\
                     \n\'read\': to download my resume\
                     \n\'help\': to display this help page';
 
-var intro = 'Welcome to my website.\
+const intro = 'Welcome to my website.\
             \n\nRead the explanations carefully and decide which direction to move in. Each direction leads to a new section of the website.';
 
-var readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to download.';
+const readdisc = 'In your front pocket is a copy of my resume, enter \'read\' to download.';
 //bools for varisou things
 var readbool = false;
 //figure out how to do this
@@ -27,11 +29,11 @@ var WORK = false;
 var EDUCATION = false;
 var MEMES = false;
 
-var helpdisc = 'Use \'help\' to display commands.';
+const helpdisc = 'Use \'help\' to display commands.';
 
-var destinations = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
+const destinations = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
 
-var lkdict = {
+const lkdict = {
     'HOME': 'You are standing in the main foyer of the Home.\
             \nTo the North is the hall of Projects.\
             \nTo the West is the office of Work.\
@@ -60,17 +62,17 @@ var lkdict = {
 
 };
 
-var map =   '...........-P-...........\
-           \n........---------........\
-           \n.....---------------.....\
-           \n..---------------------..\
-           \n-W----------H----------E-\
-           \n..---------------------..\
-           \n.....---------------.....\
-           \n........---------........\
-           \n...........-M-...........';
+const map =    '...........-P-...........\
+              \n........---------........\
+              \n.....---------------.....\
+              \n..---------------------..\
+              \n-W----------H----------E-\
+              \n..---------------------..\
+              \n.....---------------.....\
+              \n........---------........\
+              \n...........-M-...........';
 
-var destidict = {
+const destidict = {
     "PROJECTS": "You have entered the hall of Projects.",
     "MEMES": "You have entered the den of Memes.",
     "EDUCATION": "You have entered the library of Education.",
@@ -82,7 +84,7 @@ var destidict = {
     "des": "You cannot go through walls."
 };
 
-var descdict = {
+const descdict = {
     "HOME": {
         "north": "PROJECTS",
         "west": "WORK",
@@ -338,8 +340,8 @@ function lookat() {
 
 function download() {
     var link = document.createElement('a');
-    link.href = 'assets/DevonHope_Resume.pdf';
-    link.download = 'DevonHope_Resume.pdf';
+    link.href = resumePath;
+    link.download = resumePath.substring(resumePath.lastIndexOf("/") + 1);
     link.dispatchEvent(new MouseEvent('click'));
     readbool = true;
 
