@@ -11,7 +11,7 @@
     <link rel = "icon" href ="../assets/favicon.png" type = "image/x-icon">
     <title>About</title>
 </head>
-<body>
+<body id="abod" onload="setup(4);">
     <main class="gc">
         <header class="head">Devon Hope</header>
         <div class="container" onclick="menu(this)">
@@ -27,77 +27,12 @@
             <a href="https://imgur.com/t/memes" target="_blank" rel="noopener noreferrer">MEMES</a>
             <a href="about.html">ABOUT</a>
         </div>
-        <div class="res">
-            <label class="pagehead">ABOUT</label>
-            <div class="subhead">
-                I am a computer science nerd, specializing in designing, developing, and implementing
-                software and hardware solutions of any kind, anywhere. I love to make, listen and explore
-                the powers of music in my free time and dabble in hardware design for
-                PCs, synthesizers, pianos and music production hardware.
-            </div>
-            <div class="subhead">Github: <a href="https://github.com/DevonHope" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope</a></div>
-            <div class="subhead"></div>
-            <div class="subhead">Hobbies</div>
-            <div class="subsubsub">Hardware Integration</div>
-            <div class="subsubsub">Software Dev</div>
-            <div class="subsubsub">Music Creation</div>
-            <div class="subsubsub">Synth Modifying</div>
-            <div class="subsubsub">DIY Hardware Design</div>
-            <div class="subhead"></div>
-            <div class="subhead">Technical Skills</div>
-            <div class="subsub">Web Dev:</div>
-            <ul class="lisub">
-                <li>HTML5</li>
-                <li>SCSS,CSS</li>
-                <li>Javascript</li>
-            </ul>
-            <div class="subsub">Mobile:</div>
-            <ul class="lisub">
-                <li>JDK</li>
-                <li>Java 8-10</li>
-            </ul>
-            <div class="subsub">Runtime Environment:</div>
-            <ul class="lisub">
-                <li>Node.js</li>
-            </ul>
-            <div class="subsub">Script:</div>
-            <ul class="lisub">
-                <li>Python3.9</li>
-            </ul>
-            <div class="subsub">Command Line Interface:</div>
-            <ul class="lisub">
-                <li>Bash</li>
-                <li>Windows PowerShell</li>
-                <li>Batch</li>
-            </ul>
-            <div class="subsub">Multiparadigm:</div>
-            <ul class="lisub">
-                <li>C,C++</li>
-                <li>Objective-C</li>
-                <li>Python</li>
-                <li>Racket</li>
-            </ul>
-            <div class="subsub">DB Query:</div>
-            <ul class="lisub">
-                <li>MongoDB</li>
-                <li>MySQL</li>
-                <li>PostGreSQL</li>
-            </ul>
-            <div class="subsub">Compiled Languages:</div>
-            <ul class="lisub">
-                <li>Haskell</li>
-                <li>Scheme</li>
-            </ul>
-            <div class="subsub">Rule Based:</div>
-            <ul class="lisub">
-                <li>Prolog</li>
-            </ul>
-        </div>
+        <div class="res" id="about_res"></div>
         <footer class="foot">
             <p>
                 A webventure by Devon Hope. Also my resume. Based on the text adventure games Zork I, II, and III.
                 <br />
-                Contact info: 
+                Contact info:
                 <a href="mailto:admin@devonhope.net">admin@devonhope.net</a>
             </p>
         </footer>

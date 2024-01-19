@@ -70,7 +70,12 @@ const map =    '...........-P-...........\
               \n..---------------------..\
               \n.....---------------.....\
               \n........---------........\
-              \n...........-M-...........';
+              \n...........-M-...........\
+              \nLEGEND: \
+              \n P - PROJECTS \
+              \n W - WORK \
+              \n E - EDUCATION \
+              \n M - MEMES ';
 
 const destidict = {
     "PROJECTS": "You have entered the hall of Projects.",
@@ -165,6 +170,10 @@ const inhtml = {
         'height':'2200px'
     }, 'WORK': {
         'html': `<label class="pagehead">WORK</label>
+            <div class="subsub">RegistrationSafe</div>
+            <div class="subsubsub">Position: Fullstack web devevloper, desiging and implementing a full frontend + demo backend with API/PgSQL DB/RedHat server</div>
+            <div class="subsubsub">From: 2022-Present</div>
+
             <div class="subsub">Haunted House Creations</div>
             <div class="subsubsub">Position: CNC Machine Operator/3D Modeler/Product Designer</div>
             <div class="subsubsub">From: 2022-Present</div>
@@ -201,22 +210,116 @@ const inhtml = {
             <div class="subsubsub">Position: Co-internal Director</div>
             <div class="subsubsub">From: 2017-2019</div>`,
         'height':'1000px'
+    }, 'ABOUT' : {
+        'html' : `<label class="pagehead">ABOUT</label>
+            <div class="subhead">
+                I am a computer science nerd, specializing in designing, developing, and implementing
+                software and hardware solutions of any kind, anywhere. I love to make, listen and explore
+                the powers of music in my free time and dabble in hardware design for
+                PCs, synthesizers, pianos and music production hardware.
+            </div>
+            <div class="subhead">Github: <a href="https://github.com/DevonHope" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope</a></div>
+            <div class="subhead"></div>
+            <div class="subhead">Hobbies</div>
+            <div class="subsubsub">Hardware Integration</div>
+            <div class="subsubsub">Software Dev</div>
+            <div class="subsubsub">Music Creation</div>
+            <div class="subsubsub">Synth Modifying</div>
+            <div class="subsubsub">DIY Hardware Design</div>
+            <div class="subhead"></div>
+            <div class="subhead">Technical Skills</div>
+            <div class="subsub">Web Dev:</div>
+            <ul class="lisub">
+                <li>HTML5</li>
+                <li>SCSS,CSS</li>
+                <li>Javascript</li>
+            </ul>
+            <div class="subsub">Mobile:</div>
+            <ul class="lisub">
+                <li>JDK</li>
+                <li>Java 8-10</li>
+            </ul>
+            <div class="subsub">Runtime Environment:</div>
+            <ul class="lisub">
+                <li>Node.js</li>
+            </ul>
+            <div class="subsub">Script:</div>
+            <ul class="lisub">
+                <li>Python3.9</li>
+            </ul>
+            <div class="subsub">Command Line Interface:</div>
+            <ul class="lisub">
+                <li>Bash</li>
+                <li>Windows PowerShell</li>
+                <li>Batch</li>
+            </ul>
+            <div class="subsub">Multiparadigm:</div>
+            <ul class="lisub">
+                <li>C,C++</li>
+                <li>Objective-C</li>
+                <li>Python</li>
+                <li>Racket</li>
+            </ul>
+            <div class="subsub">DB Query:</div>
+            <ul class="lisub">
+                <li>MongoDB</li>
+                <li>MySQL</li>
+                <li>PostGreSQL</li>
+            </ul>
+            <div class="subsub">Compiled Languages:</div>
+            <ul class="lisub">
+                <li>Haskell</li>
+                <li>Scheme</li>
+            </ul>
+            <div class="subsub">Rule Based:</div>
+            <ul class="lisub">
+                <li>Prolog</li>
+            </ul>`
+    }
+}
+
+const setupDict = {
+    1 : {
+      id : 'work_res',
+      html : 'WORK'
+    },
+    2 : {
+      id : 'projects_res',
+      html : 'PROJECTS'
+    },
+    3 : {
+      id : 'education_res',
+      html : 'EDUCATION'
+    },
+    4 : {
+      id : 'about_res',
+      html : 'ABOUT'
     }
 }
 
 //setup process
-function setup(){
-    var cons = document.getElementById('consout');
-    var curarea = document.getElementById('calbl');
-    var arlbl = document.getElementById('arlbl');
-    var inp = document.getElementById('in');
-    //set console start output
+function setup(page){
+    if (page == 0){
+      var cons = document.getElementById('consout');
+      var curarea = document.getElementById('calbl');
+      var arlbl = document.getElementById('arlbl');
+      var inp = document.getElementById('in');
+      //set console start output
 
-    cons.value = intro+"\n\n"+lkdict['HOME']+"\n"+readdisc+"\n\n"+helpdisc;
-    curarea.innerHTML = 'HOME';
-    arlbl.innerHTML = '>';
-    inp.value = '';
-    document.getElementById('in').focus();
+      cons.value = intro+"\n\n"+lkdict['HOME']+"\n"+readdisc+"\n\n"+helpdisc;
+      curarea.innerHTML = 'HOME';
+      arlbl.innerHTML = '>';
+      inp.value = '';
+      document.getElementById('in').focus();
+    } else {
+      for (i in setupDict){
+        if (page == i){
+          var p = setupDict[i]
+          var res = document.getElementById(p.id)
+          res.innerHTML = inhtml[p.html]['html']
+        }
+      }
+    }
 }
 
 //check for return carridge
@@ -293,7 +396,7 @@ function adddiv(ca) {
     const di = document.createElement('div');
     di.id = resid;
     di.className = resid;
-    di.style.gridArea = 'innerres';
+    di.style.gridArea = resid;
     for (i in inhtml) {
         if (ca === i) {
             di.innerHTML = inhtml[i]['html'];

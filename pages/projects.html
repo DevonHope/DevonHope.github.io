@@ -11,7 +11,7 @@
     <link rel = "icon" href ="../assets/favicon.png"  type = "image/x-icon">
     <title>Projects</title>
 </head>
-<body>
+<body id="pbod" onload="setup(2);">
     <main class="gc">
         <header class="head">Devon Hope</header>
         <div class="container" onclick="menu(this)">
@@ -27,58 +27,12 @@
             <a href="https://imgur.com/t/memes" target="_blank" rel="noopener noreferrer">MEMES</a>
             <a href="about.html">ABOUT</a>
         </div>
-        <div class="res">
-            <label class="pagehead">PROJECTS</label>
-            <div class="subhead">Software Dev</div>
-            <div class="subsub">DevonHope.github.io</div>
-            <div class="subsubsub">Description: A website to promote and display my educational, professional and personal experience through a small text based adventure game.</div>
-            <div class="subsubsub">Status: In development</div>
-            <div class="subsubsub">Link: <a href="https://github.com/DevonHope/DevonHope.github.io" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/DevonHope.github.io</a></div>
-
-            <div class="subsub">Bookstore-Webapp</div>
-            <div class="subsubsub">Description: A bookstore of sorts aimed at providing a community based website to share digital copies of books, only accessible through a QR code that would be stapled in said community. Languages: PostGreSQL, python, latex, css, html, js</div>
-            <div class="subsubsub">Status: In development</div>
-            <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Online-Bookstore-Webapp" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Online-Bookstore-Webapp</a></div>
-
-            <div class="subsub">pdfcombine</div>
-            <div class="subsubsub">Description: Python script, originally a latex script, to combine all pdfs in a given folder.</div>
-            <div class="subsubsub">Status: Complete</div>
-            <div class="subsubsub">Link: <a href="https://github.com/DevonHope/pdfcombine" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/pdfcombine</a></div>
-
-            <div class="subsub">Python-CSV-Parser</div>
-            <div class="subsubsub">Description: A python script to parse csv given in a specific format, can be modified for any format.</div>
-            <div class="subsubsub">Status: Complete</div>
-            <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Python_CSV_Parser" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Python_CSV_Parser</a></div>
-
-            <div class="subsub">Meme-to-CC</div>
-            <div class="subsubsub">Description: A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.</div>
-            <div class="subsubsub">Status: roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.</div>
-            <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Meme-to-CC" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Meme-to-CC</a></div>
-
-            <div class="subsub"></div>
-            <div class="subhead">Hardware Integration Development</div>
-            <div class="subsub">Smart Home Monitoring System</div>
-            <div class="subsubsub">
-                Description: A DIY smart home montioring system, comprised of three externerl cameras,
-                two external door senors and a central computer used to process the
-                information and handle events. The computer is a Raspberry PI 3,
-                running custom adaptations of a linux apache server to communicate with the devices.
-            </div>
-            <div class="subsubsub">Status: in development, 2 cameras and 2 door sensors are operational</div>
-
-            <div class="subsub">Custom Ad-blocking Pi-hole</div>
-            <div class="subsubsub">Description: A raspberry pi running a modified version of the latest Pi-hole software to block specific apps and ads from accessing a home network.</div>
-            <div class="subsubsub">Status: in development: All device ad-blocking is operational, all device app blocking is not.</div>
-
-            <div class="subsub">Racing Simulator</div>
-            <div class="subsubsub">Description: A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.</div>
-            <div class="subsubsub">Status: Complete</div>
-        </div>
+        <div class="res" id="projects_res"></div>
         <footer class="foot">
             <p>
                 A webventure by Devon Hope. Also my resume. Based on the text adventure games Zork I, II, and III.
                 <br />
-                Contact info: 
+                Contact info:
                 <a href="mailto:admin@devonhope.net">admin@devonhope.net</a>
             </p>
         </footer>
