@@ -1,0 +1,92 @@
+name: Devon Hope
+email: me@devonhope.net
+phone: 905-751-3717
+website: https://devonhope.net
+github: https://github.com/devonhope
+location: Toronto, ON
+title: Solutions Architect
+
+summary: >
+  Multidisciplinary engineer and designer blending hardware, software, and immersive experience design.
+  Proven ability to take projects from concept to production across interactive installations, product design,
+  and web applications.
+
+experience:
+  - title: Hardware & Software Engineer
+    company: Daydream Adventures Toronto
+    location: Toronto, ON
+    start: 2024-07
+    end: Present
+    bullets:
+      - Designed and built interactive escape room props from concept through CAD, prototyping, and production.
+      - Led project development and collaborated with a creative team to deliver reliable experiences.
+
+  - title: Solutions Architect
+    company: Bright Ideas Custom Electronics Inc
+    location: Barrie, ON
+    start: 2023-01
+    end: 2024-08
+    bullets:
+      - Developed interactive electronics with a focus on ease of use and safety.
+      - Rapidly prototyped using CAD and PCB tools, iterating based on testing.
+
+  - title: Freelance Product Designer
+    company: DH Tools
+    location: Toronto, ON
+    start: 2023-07
+    end: Present
+    bullets:
+      - Created imaginative, hands-on products blending electronics, 3D design, and mechanics.
+      - Worked directly with clients to translate ideas into manufacturable, interactive prototypes.
+
+  - title: Solutions Architect
+    company: Haunted House Creations
+    location: Toronto, ON
+    start: 2022-03
+    end: 2023-09
+    bullets:
+      - Designed 3D models and PCBs for immersive, hands-on installations.
+      - Delivered reliable experiences in collaboration with cross-disciplinary teams.
+
+  - title: Fullstack Web Developer
+    company: RegistrationSafe
+    location: Toronto, ON
+    start: 2022-07
+    end: 2022-09
+    bullets:
+      - Built and deployed a front-end system with a demo backend using Next.js and PostgreSQL.
+      - Maintained custom RedHat server for deployment and operations.
+
+  - title: Sales Representative
+    company: The Source
+    location: Ottawa, ON
+    start: 2019
+    end: 2020
+    bullets:
+      - Provided tailored consultations and managed tech retail operations efficiently.
+
+  - title: Lifeguard / Swim Camp Director
+    company: Town of Aurora Pools
+    location: Aurora, ON
+    start: 2014-06
+    end: 2018-08
+    bullets:
+      - Developed lesson plans for children aged 4–12, including one-on-one support for special needs.
+      - Managed safe staffing ratios and swim camp logistics.
+
+education:
+  - degree: Bachelor of Computer Science
+    institution: Carleton University
+    location: Ottawa, ON
+    start: 2016
+    end: 2021
+    bullets:
+      - Focused on software engineering and neural networks.
+      - Served as Internal Logistics Director for CUHackathon for two years.
+
+skills:
+  programming: [Python, JavaScript, C++, SQL]
+  web: [Next.js, Node.js, PostgreSQL, HTML/CSS]
+  hardware: [CAD, PCB Design, Microcontrollers, Soldering]
+  tools: [Git, Figma, Adobe Suite, Retool, Zapier]
+

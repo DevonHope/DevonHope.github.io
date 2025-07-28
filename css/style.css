@@ -1,35 +1,44 @@
 /*TEST CSS*/
 @import 'assets/ibm-plex/css/ibm-plex.css';
 
+/* Ensure consistent background across all elements */
+html {
+    background-color: #000000;
+    min-height: 100%;
+}
+
 body, html, .gc {
     font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
     background-color: #000000;
-    height: fit-content;
-    margin: auto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     color: #FFFFFF;
 }
 
 .gc{
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 10% 1fr 10%;
+    grid-template-rows: auto 1fr auto;
     gap: 0px 0px;
     grid-template-areas:
         "container head ."
         "sidenav cons ."
         "foot foot foot";
+    min-height: 100vh;
 }
 
 /*for 404.html*/
 .gc_er{
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 10% 1fr 10%;
+    grid-template-rows: auto 1fr auto;
     gap: 0px 0px;
     grid-template-areas:
         "container head ."
         "sidenav error ."
         "foot foot foot";
+    min-height: 100vh;
 }
 
 .error{
@@ -44,7 +53,7 @@ body, html, .gc {
     padding-left:40px;
     padding-top: 20px;
     position: fixed;
-    z-index: 999;
+    z-index: 1001;
 }
 
 .bar1, .bar2, .bar3 {
@@ -74,7 +83,7 @@ body, html, .gc {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     top: 20px;
     left: 0;
     background-color: #000000;
@@ -109,7 +118,7 @@ body, html, .gc {
 .containcons {
     display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 10% 1fr 20px;
+    grid-template-rows: auto 1fr auto;
     gap: 0px 0px;
     grid-template-areas:
         ". curarea ."
@@ -117,13 +126,14 @@ body, html, .gc {
         ". inputarea .";
     grid-area: containcons;
     padding-bottom:20px;
-    height:470px;
+    min-height: 400px;
+    border: 1px solid #FFFFFF; /* Thin white border around the CLI */
 }
 
 .cons {
     display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     gap: 0px 0px;
     grid-template-areas:
         ". containcons ."
@@ -132,7 +142,9 @@ body, html, .gc {
     text-align: center;
     color: #FFFFFF;
     font-size: 18px;
-    height:700px;
+    margin-top: 20px; /* Adds space between the header and console */
+    padding-bottom: 40px; /* Increased padding to prevent footer overlap */
+    min-height: fit-content; /* Ensures it expands with content */
 }
 
 .inputarea{
@@ -178,7 +190,7 @@ body, html, .gc {
     display: block;
     grid-area: console;
     resize: none;
-    height: 400px;
+    min-height: 300px;
     width: 100%;
     background-color: inherit;
     color: #FFFFFF;
@@ -213,6 +225,8 @@ in:focus{
     gap: 0px 0px;
     grid-template-areas:
         ". innerres .";
+    margin-bottom: 20px; /* Add bottom margin to prevent footer overlap */
+    padding-bottom: 20px; /* Additional padding for safety */
 }
 
 .pagehead {
@@ -249,13 +263,210 @@ in:focus{
     grid-area: head;
     text-align: center;
     color: #FFFFFF;
-    font-size: 60px;
+    font-size: 50px;
+    padding-top: 20px; /* Adds space below the header */
+}
+
+/* Media query for smaller screens (e.g., mobile devices) */
+@media (max-width: 768px) {
+    .gc {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+            "head"
+            "container"
+            "cons"
+            "foot";
+        padding: 10px;
+    }
+    
+    .head {
+        font-size: 8vw;
+        padding: 10px 0;
+    }
+    
+    .container {
+        position: relative;
+        padding: 10px;
+        text-align: center;
+        grid-area: container;
+    }
+    
+    .cons {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "containcons"
+            "res";
+        margin-top: 10px;
+        font-size: 16px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .containcons {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "curarea"
+            "console"
+            "inputarea";
+        padding: 10px;
+        min-height: 250px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .console {
+        min-height: 200px;
+        font-size: 16px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .res {
+        max-width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+    
+    .sidenav {
+        top: 0;
+        padding-top: 140px;
+    }
+    
+    .sidenav a {
+        font-size: 20px;
+        padding: 12px 8px 12px 32px;
+    }
+    
+    .foot {
+        padding: 20px 10px;
+        font-size: 14px;
+    }
+    
+    /* Mobile-specific 3D viewer adjustments */
+    #slideshow-wrapper {
+        max-width: calc(100% - 40px);
+        width: 100%;
+        margin: 10px 20px;
+        border-radius: 4px;
+    }
+    
+    #slideshow {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    canvas {
+        width: 100%;
+        max-width: calc(100vw - 80px);
+        height: calc((100vw - 80px) * 0.75);
+        max-height: 280px;
+        min-height: 200px;
+    }
+    
+    .arrow {
+        font-size: 1.5rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Media query for tablets */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .gc {
+        grid-template-columns: 15% 70% 15%;
+    }
+    
+    .head {
+        font-size: 6vw;
+    }
+    
+    .cons {
+        font-size: 17px;
+    }
+}
+
+/* Media query for smaller screens (e.g., mobile devices) - original */
+@media (max-width: 600px) {
+    .head {
+        font-size: 8vw; /* Increase the size slightly for smaller screens */
+    }
+}
+
+/* Media query for larger screens (e.g., desktop) */
+@media (min-width: 1200px) {
+    .head {
+        font-size: 4vw; /* Decrease the size for larger screens */
+    }
+}
+
+#slideshow-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+#slideshow {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    scroll-snap-type: x mandatory;
+    overflow: hidden;
+    width: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: 300px;
+    scroll-snap-align: start;
+    background-color: #111;
+    flex-shrink: 0;
+    border: none;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow.left {
+    left: 10px; /* Position on the left side */
+}
+
+.arrow.right {
+    right: 10px; /* Position on the right side */
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .foot{
     grid-area: foot;
     text-align: center;
     color: #FFFFFF;
+    padding: 20px;
+    margin-top: auto;
 }
 
 /*for the color change of hyperlinks*/
