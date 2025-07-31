@@ -11,6 +11,30 @@
     <script src="../console.js"></script>
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylon.glTF2FileLoader.min.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylon.stlFileLoader.min.js"></script>
+    <script>
+        // Ensure STL loader is properly registered after loading
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof BABYLON !== 'undefined' && BABYLON.SceneLoader) {
+                // Check if STL loader is available by checking the class exists
+                console.log('Checking STL loader availability...');
+                if (typeof BABYLON.STLFileLoader !== 'undefined') {
+                    console.log('STL loader class is available');
+                    // Try to register the STL loader
+                    try {
+                        BABYLON.SceneLoader.RegisterPlugin(new BABYLON.STLFileLoader());
+                        console.log('STL loader registered successfully');
+                    } catch (e) {
+                        console.log('STL loader might already be registered:', e.message);
+                    }
+                } else {
+                    console.error('STL loader class not found - check if babylon.stlFileLoader.min.js loaded properly');
+                }
+            } else {
+                console.error('BABYLON.SceneLoader not available');
+            }
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <link rel = "icon" href ="../assets/favicon.png"  type = "image/x-icon">
     <title>Projects</title>

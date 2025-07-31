@@ -369,27 +369,6 @@ in:focus{
         font-size: 1.5rem;
         padding: 0.3rem 0.6rem;
     }
-    
-    /* Additional mobile constraints for main page */
-    #res {
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-        word-wrap: break-word;
-        box-sizing: border-box;
-    }
-    
-    /* Ensure all content within res is constrained */
-    #res * {
-        max-width: 100% !important;
-        box-sizing: border-box;
-    }
-    
-    /* Specific constraints for dynamically loaded content */
-    #res .subsubsub {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
-    }
 }
 
 /* Media query for tablets */
