@@ -893,6 +893,10 @@ function babylonLoadAllModelsInSlide(canvasId, slide) {
         return;
     }
 
+    // Add fade-out effect at the start of loading
+    canvas.style.transition = 'opacity 0.2s ease-in-out';
+    canvas.style.opacity = '0.3';
+
     // Firefox-specific canvas setup
     const isFirefoxBrowser = navigator.userAgent.toLowerCase().includes('firefox');
     if (isFirefoxBrowser) {
@@ -1012,6 +1016,18 @@ function babylonLoadAllModelsInSlide(canvasId, slide) {
     // Function to handle when all models are loaded
     function onAllModelsLoaded() {
         console.log(`All ${totalModels} models loaded for slide: ${slide.displayName || slide.folderName}`);
+        
+        // Add a subtle fade-in animation to the canvas after models load
+        const canvas = document.getElementById('modelCanvas');
+        if (canvas) {
+            canvas.style.opacity = '0';
+            canvas.style.transition = 'opacity 0.4s ease-in-out';
+            
+            // Trigger fade-in after a small delay to ensure everything is rendered
+            setTimeout(() => {
+                canvas.style.opacity = '1';
+            }, 50);
+        }
         
         // DEBUG: Print coordinate summary for all loaded models
         console.log("=== COORDINATE SUMMARY ===");
@@ -1844,6 +1860,12 @@ function toggleFullscreen() {
             explodeButton.remove();
         }
         
+        // Remove fullscreen title label
+        const titleLabel = document.getElementById('fullscreen-title-label');
+        if (titleLabel) {
+            titleLabel.remove();
+        }
+        
         // Remove fullscreen overlay and restore page scrolling
         const fullscreenOverlay = document.getElementById('fullscreen-overlay');
         if (fullscreenOverlay) {
@@ -2272,6 +2294,40 @@ function toggleFullscreen() {
             
             explodeButton.onclick = toggleExplodeView;
             slideshowWrapper.appendChild(explodeButton);
+            
+            // Create project title label for fullscreen
+            const titleLabel = document.createElement('div');
+            titleLabel.id = 'fullscreen-title-label';
+            
+            // Get current project name
+            const currentSlide = window.slideList && window.slideList[window.currentSlideIndex];
+            const projectName = currentSlide ? (currentSlide.displayName || currentSlide.folderName) : 'Project';
+            
+            titleLabel.innerHTML = projectName;
+            titleLabel.style.cssText = `
+                position: ${isMobile ? 'fixed' : 'absolute'};
+                bottom: ${isMobile ? '20px' : '30px'};
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 20000;
+                background: rgba(0, 0, 0, 0.7);
+                border: 1px solid rgba(255, 165, 132, 0.3);
+                color: #FFA584;
+                border-radius: 5px;
+                font-family: 'IBM Plex Mono', monospace;
+                padding: ${isMobile ? '10px 20px' : '8px 16px'};
+                font-size: ${isMobile ? '18px' : '16px'};
+                font-weight: bold;
+                text-align: center;
+                backdrop-filter: blur(5px);
+                pointer-events: none;
+                white-space: nowrap;
+                max-width: 80%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            `;
+            
+            slideshowWrapper.appendChild(titleLabel);
         }, isMobile ? 50 : 100);
         
         console.log("Entered fullscreen mode");
@@ -2867,6 +2923,18 @@ function scrollSlideshow(direction) {
     // Load the new slide with all its models
     loadSlide(window.currentSlideIndex);
     updateSlideInfo();
+    updateFullscreenTitle(); // Update fullscreen title if in fullscreen mode
+}
+
+// Function to update fullscreen title label when slide changes
+function updateFullscreenTitle() {
+    const titleLabel = document.getElementById('fullscreen-title-label');
+    if (titleLabel && window.slideList && window.currentSlideIndex !== undefined) {
+        const currentSlide = window.slideList[window.currentSlideIndex];
+        const projectName = currentSlide ? (currentSlide.displayName || currentSlide.folderName) : 'Project';
+        titleLabel.innerHTML = projectName;
+        console.log('Updated fullscreen title to:', projectName);
+    }
 }
 
 // Additional navigation functions for direct slide control
@@ -2877,6 +2945,7 @@ function previousSlide() {
     
     loadSlide(window.currentSlideIndex);
     updateSlideInfo();
+    updateFullscreenTitle(); // Update fullscreen title if in fullscreen mode
 }
 
 function nextSlide() {
@@ -2886,6 +2955,7 @@ function nextSlide() {
     
     loadSlide(window.currentSlideIndex);
     updateSlideInfo();
+    updateFullscreenTitle(); // Update fullscreen title if in fullscreen mode
 }
 
 // Function to refresh/reload the slideshow (useful for development)
