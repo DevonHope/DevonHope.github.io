@@ -121,6 +121,9 @@
     .explorer-wrap{margin:12px auto;border-radius:0}
   .explorer-body{padding:12px; margin:6px}
   .explorer-tabs{padding:6px 6px}
+  /* make footer more compact on small screens */
+  .explorer-footer{padding:6px 8px;font-size:12px}
+  .explorer-footer > div{font-size:12px}
     }
     /* Explorer-only spacing overrides: keep main site untouched */
     .explorer-wrap .containcons{
@@ -280,7 +283,7 @@
 
       <div class="explorer-footer" id="explorerFooter">
         <div style="flex:1 1 auto; text-align:left; color:#bbb;">A curriculum vitae by Devon Hope, based on the text adventure Zork games.</div>
-        <div style="flex:0 0 auto; text-align:right; color:#bbb;">Contact: <a href="mailto:admin@devonhope.net" style="color:#FFA584;">admin@devonhope.net</a></div>
+        <div style="flex:0 0 auto; text-align:right; color:#bbb;">Contact: <a href="mailto:me@devonhope.net" style="color:#FFA584;">me@devonhope.net</a></div>
       </div>
     </div>
   </main>
@@ -289,8 +292,8 @@
     // Pages to show as tabs (keep in sync with /pages folder)
     const pages = [
       {label: 'CONSOLE', href: 'index.html'},
-    {label: 'PROJECTS', href: 'pages/projects.html'},
-    {label: '3D', href: 'pages/objects.html'},
+      {label: 'PROJECTS', href: 'pages/projects.html'},
+      {label: '3D', href: 'pages/objects.html'},
       {label: 'WORK', href: 'pages/work.html'},
       {label: 'EDUCATION', href: 'pages/edu.html'},
       {label: 'ABOUT', href: 'pages/about.html'}
