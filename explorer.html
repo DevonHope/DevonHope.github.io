@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Explorer — Devon Hope</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel = "icon" href ="assets/favicon.png"  type = "image/x-icon">
+  <style>
+    /* Minimal explorer window styles, using site fonts/colors */
+    .explorer-wrap{
+      box-sizing: border-box;
+      max-width: 1000px;
+      margin: 10px auto;
+      border: 2px solid #FFFFFF; /* match console border */
+      background: #000;
+      color: #fff;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    }
+
+    .explorer-titlebar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(#050505, #0a0a0a);
+    }
+
+    .explorer-controls{
+      display:flex;gap:8px;align-items:center;
+    }
+
+    /* Minimalist B&W control icons */
+    .icon-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:28px;
+      height:28px;
+      padding:4px;
+      background:transparent;
+      border:1px solid rgb(255, 255, 255);
+      color:#fff;
+      cursor:pointer;
+      box-sizing:border-box;
+    }
+    .icon-btn:focus{outline:2px solid rgba(255, 255, 255, 0.281);outline-offset:2px}
+    .icon-btn:hover{background:rgba(255, 255, 255, 0.411)}
+    .icon-btn svg{width:14px;height:14px;display:block;stroke:#fff;stroke-width:1.6;fill:none}
+
+    /* Tabs */
+    .explorer-tabs{
+      display:flex;gap:3px;padding:6px 12px 0;background:linear-gradient(#070707,#0b0b0b); /* align left padding with explorer-body margin */
+      border-bottom:0px solid rgba(255,255,255,0.03);
+      overflow:auto;
+    }
+    .explorer-tab{
+      padding:6px 10px;border-radius:0;background:transparent;border:2px solid #FFFFFF;color:#DDD;
+      border-bottom: 0px solid;
+      font-weight:600;cursor:pointer;white-space:nowrap;font-size:14px;
+    }
+    .explorer-tab.active{
+      background:linear-gradient(#0c0c0c,#151515);border-color:#FFFFFF;color:#FFA584;
+      box-shadow: none;
+    }
+    .explorer-tab:hover{
+      background:rgba(255, 255, 255, 0.411);
+    }
+
+    .explorer-body{
+        display:block;
+        padding:22px;
+        min-height:360px;
+        background:linear-gradient(#050505,#080808);
+        border-top: 2px solid #FFFFFF;
+        border-bottom: 2px solid #FFFFFF;
+        border-left: none;
+        border-right: none;
+        box-sizing: border-box;
+        margin: 0px;
+    }
+
+    .explorer-footer{
+      padding:10px 14px;border-top:1px solid rgba(255,255,255,0.04);font-size:13px;color:#bbb;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+
+    /* Animations and minimized bar */
+    .explorer-wrap{
+      transition: transform 260ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease, width 200ms ease, height 200ms ease;
+      transform-origin: center center;
+    }
+    .explorer-wrap.closing{
+      transform: scale(0.18) translateY(-8px) rotate(-6deg);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .explorer-wrap.minimized{
+      opacity: 0;pointer-events: none;visibility: hidden;transform: translateY(6px) scale(0.98);
+    }
+    .explorer-wrap.maximized{
+      position: fixed !important; top: 0; left: 0; right:0; bottom:0; width: 100vw !important; height: 100vh !important; max-width: none !important; margin: 0 !important; border-radius: 0 !important; z-index: 99999;
+      overflow: auto;
+    }
+
+    #minimizedBar{
+      position: fixed; left: 12px; bottom: 12px; display:flex; gap:8px; z-index:120000; align-items:center; pointer-events:auto;
+    }
+    .minimized-tab{
+      background: #0b0b0b; color:#fff; border:1px solid rgba(255,255,255,0.12); padding:6px 10px; font-weight:600; cursor:pointer; font-size:13px; display:inline-flex; align-items:center; gap:8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+      border-radius:3px;
+    }
+    .minimized-tab:active{transform:translateY(1px)}
+
+    /* small screens */
+  @media (max-width:640px){
+    .explorer-wrap{margin:12px auto;border-radius:0}
+  .explorer-body{padding:12px; margin:6px}
+  .explorer-tabs{padding:6px 6px}
+    }
+    /* Explorer-only spacing overrides: keep main site untouched */
+    .explorer-wrap .containcons{
+      min-height: 220px; /* reduce vertical height of the console area inside explorer */
+      padding: 12px; /* spacing inside the dotted container */
+      border: 2px dashed #FFFFFF; /* long-line dashed border */
+      box-sizing: border-box;
+      margin: 6px 0; /* small vertical breathing room */
+    }
+    .explorer-wrap .cons{
+      margin-top: 12px;
+      padding-bottom: 12px;
+    }
+    .explorer-wrap .console{
+        min-height: 160px;
+        /* Restrict how tall the console can grow inside the explorer preview */
+        max-height: 360px; /* overall hard cap */
+        overflow-y: auto; /* scroll when content exceeds max */
+        transition: height 140ms ease;
+    }
+    /* Fake thicker caret implementation */
+    .in{
+      caret-color: transparent; /* hide native caret */
+      position: relative;
+      background: transparent;
+      color: inherit;
+      border: none;
+    }
+    .fake-caret{
+      position:absolute; top:0; width:3px; height:1.2em; background:#FFA584; animation: blink 1s steps(1,start) infinite; pointer-events:none; display:none; z-index:2;
+    }
+    .caret-measure{font-family:inherit;font-size:18px}
+    @keyframes blink{50%{opacity:0}100%{opacity:1}}
+    /* Minimalist scrollbar for the tabs: square white rectangle thumb */
+    .explorer-tabs{
+      /* Firefox */
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff transparent;
+    }
+    /* WebKit browsers (Chrome, Edge, Safari) */
+    .explorer-tabs::-webkit-scrollbar{
+      height:12px; /* horizontal scrollbar height */
+    }
+    .explorer-tabs::-webkit-scrollbar-track{
+      background: transparent;
+    }
+    .explorer-tabs::-webkit-scrollbar-thumb{
+      background: #ffffff;
+      border-radius: 0; /* square rectangle */
+      min-width: 28px; /* make thumb tappable/clickable */
+      height: 10px;
+      box-shadow: none;
+      border: none;
+    }
+    .explorer-tabs::-webkit-scrollbar-thumb:hover{
+      background: #f2f2f2;
+    }
+    /* Match console scrollbar to tabs: white solid rectangular thumb */
+    .explorer-wrap .console{
+      /* Firefox */
+      scrollbar-width: thin;
+      scrollbar-color: #ffffff transparent;
+    }
+    .explorer-wrap .console::-webkit-scrollbar{
+      width:10px; /* vertical scrollbar width */
+    }
+    .explorer-wrap .console::-webkit-scrollbar-track{ background: transparent; }
+    .explorer-wrap .console::-webkit-scrollbar-thumb{ background: #ffffff; border-radius:0; border:none; }
+    .explorer-wrap .console::-webkit-scrollbar-thumb:hover{ background:#f2f2f2 }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <!-- BabylonJS and loaders (same includes used on index/pages) -->
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylon.glTF2FileLoader.min.js"></script>
+  <script src="https://cdn.babylonjs.com/loaders/babylon.stlFileLoader.min.js"></script>
+  <script src="console.js"></script>
+</head>
+<body>
+  <main>
+    <div class="explorer-wrap" role="region" aria-label="File explorer preview">
+      <div class="explorer-titlebar">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="font-weight:700;color:#FFA584;">DEVON HOPE</div>
+          <!-- <div style="color:#777;font-size:13px;">— Program Explorer</div> -->
+        </div>
+        <div class="explorer-controls">
+          <button class="icon-btn" title="Minimize" aria-label="Minimize">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 12h12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="icon-btn" title="Maximize" aria-label="Maximize">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="0" ry="0"/></svg>
+          </button>
+          <button class="icon-btn" title="Close" aria-label="Close">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav class="explorer-tabs" id="explorerTabs" aria-label="Pages tabs">
+        <!-- Tabs will be inserted by JS -->
+      </nav>
+
+      <section class="explorer-body" id="explorerBody">
+        <h2 id="explorerHeading" style="margin-top:0;color:#FFA584;">Viewer</h2>
+        <!-- <p style="color:#ccc;">This is a visual mock of a minimal file-explorer window. Click a tab to open the corresponding page.</p> -->
+        <div id="pagesContainer" style="margin-top:18px;color:#eee;font-size:14px;">
+          <!-- Static inlined page panels (no scripts from original pages are executed) -->
+          <div id="panel-home" class="page-panel">
+            <div class="page-content">
+              <div class="cons">
+                <div class="containcons">
+                  <div class="curarea"><label id="calbl" class="calbl"></label></div>
+                  <textarea id="consout" class="console" readonly></textarea>
+                  <div class="inputarea" style="position:relative;">
+                    <label id="arlbl" class="arlbl"></label>
+                    <input id="in" class="in" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                    <span class="fake-caret" aria-hidden="true"></span>
+                    <span class="caret-measure" aria-hidden="true" style="position:absolute;left:-9999px;top:0;visibility:hidden;white-space:pre;">x</span>
+                  </div>
+                </div>
+                <res class="res" id="res"></res>
+              </div>
+            </div>
+            <!-- panel footer removed; explorer footer shows webventure footer -->
+          </div>
+
+          <div id="panel-projects" class="page-panel">
+            <div class="page-content"><div class="res">(Projects page content)</div></div>
+            <!-- panel footer removed; explorer footer shows webventure footer -->
+          </div>
+
+          <div id="panel-objects" class="page-panel">
+            <div class="page-content"><div class="res">(3D Objects gallery)</div></div>
+          </div>
+
+          <div id="panel-work" class="page-panel">
+            <div class="page-content"><div class="res">(Work page content)</div></div>
+            <!-- panel footer removed; explorer footer shows webventure footer -->
+          </div>
+
+          <div id="panel-education" class="page-panel">
+            <div class="page-content"><div class="res">(Education page content)</div></div>
+            <!-- panel footer removed; explorer footer shows webventure footer -->
+          </div>
+
+          <div id="panel-about" class="page-panel">
+            <div class="page-content"><div class="res">(About page content)</div></div>
+            <!-- <footer class="foot" style="margin-top:14px;color:#bbb;font-size:13px">
+              <p>Contact: <a href="mailto:admin@devonhope.net">admin@devonhope.net</a></p>
+            </footer> -->
+          </div>
+        </div>
+      </section>
+
+      <div class="explorer-footer" id="explorerFooter">
+        <div style="flex:1 1 auto; text-align:left; color:#bbb;">A curriculum vitae by Devon Hope, based on the text adventure Zork games.</div>
+        <div style="flex:0 0 auto; text-align:right; color:#bbb;">Contact: <a href="mailto:admin@devonhope.net" style="color:#FFA584;">admin@devonhope.net</a></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Pages to show as tabs (keep in sync with /pages folder)
+    const pages = [
+      {label: 'CONSOLE', href: 'index.html'},
+    {label: 'PROJECTS', href: 'pages/projects.html'},
+    {label: '3D', href: 'pages/objects.html'},
+      {label: 'WORK', href: 'pages/work.html'},
+      {label: 'EDUCATION', href: 'pages/edu.html'},
+      {label: 'ABOUT', href: 'pages/about.html'}
+    ];
+
+    const tabsEl = document.getElementById('explorerTabs');
+    const bodyPreview = document.getElementById('explorerPreview');
+    const heading = document.getElementById('explorerHeading');
+
+    // Autosize helper: make the console textarea height match its content
+    function autosizeConsole(){
+      try{
+        const cons = document.getElementById('consout');
+        if(!cons) return;
+        // store initial height once
+        if(!cons._initialHeight) {
+          // compute current rendered height
+          cons._initialHeight = cons.clientHeight || 160;
+        }
+        // reset height to measure
+        cons.style.height = 'auto';
+        // desired height based on content
+        const desired = Math.min(cons.scrollHeight, (parseInt(getComputedStyle(cons).maxHeight) || 360));
+        // cap growth relative to initial height (allow some breathing room)
+        const cap = Math.min(desired, cons._initialHeight + 220);
+        cons.style.height = (cap) + 'px';
+      }catch(e){ /* ignore */ }
+    }
+
+    // If console.js defines scrollConsoleToBottom, wrap it so autosize runs after scroll
+    if(typeof window.scrollConsoleToBottom === 'function'){
+      const __origScroll = window.scrollConsoleToBottom;
+      window.scrollConsoleToBottom = function(){
+        try{ __origScroll(); }catch(e){}
+        autosizeConsole();
+      }
+    }
+
+    function createTab(p){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'explorer-tab';
+      btn.textContent = p.label;
+      btn.dataset.panel = p.panel || '';
+      btn.onclick = ()=> setActiveTab(p);
+      return btn;
+    }
+
+    function setActiveTab(p){
+      // update active tab class
+      Array.from(tabsEl.children).forEach(c=>c.classList.remove('active'));
+      const all = Array.from(tabsEl.children).find(c=>c.textContent===p.label);
+      if(all) all.classList.add('active');
+
+      // switch panels
+  // keep the inner heading generic for the Console tab
+  const isConsole = (p && String(p.label).toLowerCase() === 'console');
+  heading.textContent = isConsole ? '' : p.label;
+      const panels = document.querySelectorAll('.page-panel');
+      panels.forEach(node=>node.style.display = 'none');
+      const pid = (p.label||'').toLowerCase();
+  const map = { 'console':'panel-home', 'projects':'panel-projects', 'work':'panel-work', 'education':'panel-education', 'about':'panel-about' };
+  // map 3D tab label to the objects panel
+  map['3d'] = 'panel-objects';
+      const show = document.getElementById(map[pid]);
+      if(show) show.style.display = '';
+      // populate non-console panels from console.js content (only once)
+      const panelKey = (p && p.label) ? String(p.label).toLowerCase() : '';
+      if(panelKey && panelKey !== 'console'){
+        populatePanel(panelKey, show);
+      }
+      // initialize console behavior when Console is shown (only once)
+      if(isConsole){
+        try{
+          if(!window.explorerConsoleInitialized && typeof setup === 'function'){
+            setup(0);
+            // give the setup a moment, then autosize and attach input listener
+            setTimeout(()=>{
+              try{ autosizeConsole();
+                const cons = document.getElementById('consout');
+                if(cons) cons.addEventListener('input', autosizeConsole);
+              }catch(e){}
+            }, 50);
+            window.explorerConsoleInitialized = true;
+          }
+        }catch(e){ console.warn('Could not initialize explorer console', e); }
+      }
+    }
+
+    // Populate a panel with HTML from console.js (getContentData or fallback inhtml)
+    async function populatePanel(panelKey, panelEl){
+      try{
+        // Ensure YAML resume data is available so the ABOUT panel can show the summary
+        if(!window.resumeData){
+          if(typeof loadResumeData === 'function'){
+            try{ await loadResumeData(); }catch(err){ console.warn('Failed to load resume YAML before populating panel', err); }
+          }
+        }
+        if(!panelEl) panelEl = document.getElementById({ 'console':'panel-home', 'projects':'panel-projects', 'work':'panel-work', 'education':'panel-education', 'about':'panel-about' }[panelKey]);
+        if(!panelEl) return;
+        if(panelEl.dataset.loaded === 'true') return; // already populated
+
+        const dataSource = (typeof getContentData === 'function') ? getContentData() : (window.inhtml || {});
+      // allow the UI label '3d' to map to the console.js 'OBJECTS' content key
+      const mapKey = (panelKey.toLowerCase() === '3d') ? 'OBJECTS' : panelKey.toUpperCase();
+      const contentObj = dataSource[mapKey] || dataSource[panelKey.toUpperCase()] || null;
+        const html = contentObj && contentObj.html ? contentObj.html : (`<div style="color:#bbb">No content available for ${panelKey}</div>`);
+
+        const contentContainer = panelEl.querySelector('.page-content');
+        if(contentContainer){
+          // parse HTML and remove header elements we don't want inside the pane
+          const tmp = document.createElement('div'); tmp.innerHTML = html;
+          // remove top-level headers and pagehead/subhead elements
+          tmp.querySelectorAll('header.head, .pagehead, .subhead, .head').forEach(n=>n.remove());
+          // also remove any standalone <label class="pagehead"> occurrences
+          tmp.querySelectorAll('label.pagehead').forEach(n=>n.remove());
+          contentContainer.innerHTML = tmp.innerHTML;
+          // If this is the About panel, prepend the YAML summary (generateAboutHTML uses resumeData.summary)
+          try{
+            const key = (panelKey||'').toLowerCase();
+            if(key === 'about'){
+              // prefer direct `resumeData` identifier (console.js defines it as a top-level let)
+              if(typeof resumeData !== 'undefined' && resumeData && resumeData.summary){
+                contentContainer.innerHTML = `<div class="subhead">${resumeData.summary}</div>` + contentContainer.innerHTML;
+              }
+            }
+          }catch(e){ /* ignore injection errors */ }
+          panelEl.dataset.loaded = 'true';
+        }
+
+  // If Projects or OBJECTS, initialize slideshow if available
+  if((mapKey === 'PROJECTS' || mapKey === 'OBJECTS') && typeof setupSlideshow === 'function'){
+          // small delay to ensure DOM insertion
+          setTimeout(()=>{
+            try{ setupSlideshow(); }catch(e){ console.warn('setupSlideshow failed', e); }
+          }, 120);
+        }
+      }catch(e){ console.warn('populatePanel error', e); }
+    }
+
+  // Build tabs
+  pages.forEach(p=>tabsEl.appendChild(createTab(p)));
+
+  // Hide all panels by default
+  document.querySelectorAll('.page-panel').forEach(n=>n.style.display='none');
+
+  // Activate tab based on current location or default to Home
+  const current = pages.find(p=>location.pathname.endsWith(p.href) || location.pathname.endsWith('/'+p.href));
+  setActiveTab(current||pages[0]);
+
+  // native caret is used for the input; caret color set in CSS
+    (function(){
+      const inp = document.getElementById('in');
+      const fake = document.querySelector('.fake-caret');
+      const measure = document.querySelector('.caret-measure');
+      if(!inp || !fake || !measure) return;
+
+      function updateCaret(){
+        // set measure text to input value up to caret
+        const pos = (typeof inp.selectionStart === 'number') ? inp.selectionStart : inp.value.length;
+        const before = inp.value.slice(0,pos) || '';
+        measure.textContent = before.replace(/ /g,'\u00a0');
+        // compute left offset relative to inputarea (parent)
+        const measureWidth = measure.offsetWidth;
+        const inpStyle = window.getComputedStyle(inp);
+        const paddingLeft = parseFloat(inpStyle.paddingLeft) || 0;
+        const scrollLeft = inp.scrollLeft || 0;
+        // inp.offsetLeft is relative to positioned ancestor (.inputarea)
+        const baseLeft = inp.offsetLeft || 0;
+        const caretLeft = baseLeft + paddingLeft + measureWidth - scrollLeft;
+        fake.style.left = Math.max(2, caretLeft) + 'px';
+    // vertically position: top relative to input (ensure inside input)
+    const topInInp = Math.max(0, Math.round((inp.clientHeight - fake.offsetHeight) / 2));
+    // input is inside .inputarea; use inp.offsetTop to place caret relative to .inputarea
+    fake.style.top = (inp.offsetTop + topInInp) + 'px';
+      }
+
+      inp.addEventListener('focus', ()=>{ fake.style.display='block'; updateCaret(); });
+      inp.addEventListener('blur', ()=>{ fake.style.display='none'; });
+      ['input','keyup','click','select'].forEach(evt=> inp.addEventListener(evt, updateCaret));
+      // Ensure Enter submits commands: call cmdloop() when Enter pressed
+      inp.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.keyCode === 13){
+          e.preventDefault();
+          try{
+            if(typeof cmdloop === 'function') cmdloop();
+            else if(typeof onEnter === 'function') onEnter({which:13});
+          }catch(err){ console.warn('cmdloop error', err); }
+        }
+      });
+      // initialize
+      updateCaret();
+    })();
+
+    // --- Window control behavior ---
+    (function(){
+      const wrap = document.querySelector('.explorer-wrap');
+      const controls = document.querySelectorAll('.explorer-controls .icon-btn');
+      const [btnMin, btnMax, btnClose] = controls;
+
+      // create minimized bar container
+      let minBar = document.getElementById('minimizedBar');
+      if(!minBar){
+        minBar = document.createElement('div');
+        minBar.id = 'minimizedBar';
+        document.body.appendChild(minBar);
+      }
+
+      function restoreFromMin(tabEl){
+        if(tabEl && tabEl._restore){ tabEl._restore(); }
+      }
+
+      // Close: play quick shrink/rotate animation then hide; create a reopen tab
+      btnClose.addEventListener('click', ()=>{
+        // if already closing, ignore
+        if(wrap.classList.contains('closing')) return;
+        wrap.classList.add('closing');
+        // after animation remove from DOM (but keep a reopen control)
+        setTimeout(()=>{
+          wrap.style.display = 'none';
+          wrap.classList.remove('closing');
+          // create a reopen tab
+          const tab = document.createElement('button');
+          tab.className = 'minimized-tab';
+          tab.textContent = 'Reopen Explorer';
+          tab.onclick = ()=>{
+            wrap.style.display = ''; // show
+            // play tiny pop-in
+            requestAnimationFrame(()=>{ wrap.style.transition = 'none'; wrap.style.transform = 'scale(0.92)'; wrap.style.opacity = '0';
+              requestAnimationFrame(()=>{ wrap.style.transition = ''; wrap.style.transform=''; wrap.style.opacity=''; });
+            });
+            tab.remove();
+          };
+          minBar.appendChild(tab);
+        }, 260);
+      });
+
+      // Minimize: hide the window and add a small tab to the minimized bar
+      btnMin.addEventListener('click', ()=>{
+        if(wrap.classList.contains('minimized')) return;
+        wrap.classList.add('minimized');
+        // push a minimize tab
+        const label = document.createElement('button');
+        label.className = 'minimized-tab';
+        label.textContent = 'Explorer';
+        // store restore handler
+        label._restore = ()=>{
+          wrap.classList.remove('minimized');
+          // small reveal animation
+          wrap.style.display = '';
+          wrap.style.opacity = '0';
+          setTimeout(()=>{ wrap.style.opacity='1'; }, 10);
+          label.remove();
+        };
+        label.onclick = ()=> restoreFromMin(label);
+        minBar.appendChild(label);
+      });
+
+      // Maximize: toggle fill-screen state
+      btnMax.addEventListener('click', ()=>{
+        const isMax = wrap.classList.toggle('maximized');
+        // if maximizing, ensure it's visible
+        if(isMax){ wrap.style.display = ''; document.body.style.overflow = 'hidden'; }
+        else { document.body.style.overflow = ''; }
+      });
+    })();
+  </script>
+</body>
+</html>

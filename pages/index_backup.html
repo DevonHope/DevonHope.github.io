@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A website by Devon Hope">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Devon Hope">
+        <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+        <script src="../console.js"></script>
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylon.glTF2FileLoader.min.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylon.stlFileLoader.min.js"></script>
+        <script>
+            // Ensure STL loader is properly registered after loading
+            document.addEventListener('DOMContentLoaded', function() {
+                if (typeof BABYLON !== 'undefined' && BABYLON.SceneLoader) {
+                    // Check if STL loader is available by checking the class exists
+                    console.log('Checking STL loader availability...');
+                    if (typeof BABYLON.STLFileLoader !== 'undefined') {
+                        console.log('STL loader class is available');
+                        // Try to register the STL loader
+                        try {
+                            BABYLON.SceneLoader.RegisterPlugin(new BABYLON.STLFileLoader());
+                            console.log('STL loader registered successfully');
+                        } catch (e) {
+                            console.log('STL loader might already be registered:', e.message);
+                        }
+                    } else {
+                        console.error('STL loader class not found - check if babylon.stlFileLoader.min.js loaded properly');
+                    }
+                } else {
+                    console.error('BABYLON.SceneLoader not available');
+                }
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+        <link rel = "icon" href ="../assets/favicon.png"  type = "image/x-icon">
+        <title>Console (backup)</title>
+    </head>
+    <body>
+        <!-- Backup of original index.html saved here -->
+        <main class="gc">
+            <header class="head">Devon Hope</header>
+            <div class="container" onclick="menu(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="../index.html">HOME</a>
+                <a href="projects.html">PROJECTS</a>
+                <a href="work.html">WORK</a>
+                <a href="edu.html">EDUCATION</a>
+                <a href="about.html">ABOUT</a>
+            </div>
+            <div class="cons">
+                <div class="containcons">
+                    <div class="curarea">
+                        <label class="calbl" id="calbl"></label>
+                    </div>
+                    <textarea class="console" id="consout" readonly></textarea>
+                    <div class="inputarea">
+                        <label class="arlbl" id="arlbl"></label>
+                        <input class="in" id="in" onkeypress="onEnter(event)">
+                    </div>
+                </div>
+                <res class="res" id="res">
+                </res>
+            </div>
+            <footer class="foot" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+                <div style="flex:1 1 auto; text-align:left;">A webventure by Devon Hope. Also my resume. Based on the text adventure games Zork I, II, and III.</div>
+                <div style="flex:0 0 auto; text-align:right;">Contact: <a href="mailto:admin@devonhope.net" style="color:#FFA584;">admin@devonhope.net</a></div>
+            </footer>
+        </main>
+    </body>
+</html>

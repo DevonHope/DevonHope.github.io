@@ -1,44 +1,43 @@
-<!-- 404 page -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A website by Devon Hope">
-        <meta name="keywords" content="HTML, CSS, JavaScript">
-        <meta name="author" content="Devon Hope">
-        <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
-        <script src="console.js"></script>
-        <link rel = "icon" href ="assets/favicon.png"  type = "image/x-icon">
-        <title>404</title>
-    </head>
-    <body id="bod" onload="setup();">
-        <main class="gc_er">
-            <header class="head">Error 404</header>
-            <div class="container" onclick="menu(this)">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>404 — File Not Found</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel = "icon" href ="assets/favicon.png"  type = "image/x-icon">
+    <style>
+        /* small overrides to use explorer-style window for 404 */
+        .er-wrap{max-width:920px;margin:28px auto;background:#000;color:#fff;border:2px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,0.6);}
+        .er-title{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:linear-gradient(#050505,#0a0a0a);border-bottom:1px solid rgba(255,255,255,0.06)}
+        .er-body{padding:22px}
+        .file-list{background:#060606;border:1px solid rgba(255,255,255,0.04);padding:12px;color:#ddd}
+        .file-item{padding:6px 8px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+        .file-item:last-child{border-bottom:0}
+        .big-404{font-size:20px;color:#FFA584;margin-bottom:12px}
+    </style>
+</head>
+<body>
+    <main>
+        <div class="er-wrap">
+            <div class="er-title">
+                <div style="font-weight:700;color:#FFA584;">Explorer — 404</div>
+                <div style="color:#bbb">File Not Found</div>
             </div>
-            <div id="mySidenav" class="sidenav">
-                <a href="index.html">HOME</a>
-                <a href="pages/projects.html">PROJECTS</a>
-                <a href="pages/work.html">WORK</a>
-                <a href="pages/edu.html">EDUCATION</a>
-                <a href="https://imgur.com/t/memes" target="_blank" rel="noopener noreferrer">MEMES</a>
-                <a href="pages/about.html">ABOUT</a>
+            <div class="er-body">
+                <div class="big-404">404 — File not found</div>
+                <p style="color:#ccc;margin-top:0;margin-bottom:12px">The page you requested could not be located. Below is a mock file explorer showing the site root.</p>
+                <div class="file-list" role="list">
+                    <div class="file-item">assets/</div>
+                    <div class="file-item">css/</div>
+                    <div class="file-item">console.js</div>
+                    <div class="file-item">explorer.html</div>
+                    <div class="file-item">index.html</div>
+                    <div class="file-item">pages/ (protected)</div>
+                </div>
+                <p style="color:#bbb;margin-top:14px">Return to <a href="/" style="color:#FFA584">home</a> or contact <a href="mailto:admin@devonhope.net" style="color:#FFA584">admin@devonhope.net</a>.</p>
             </div>
-            <er class="error">
-                <img src="assets/mnl_b.gif" alt="loading" width=100% height=100%>
-            </er>
-            <footer class="foot">
-                <p>
-                    A webventure by Devon Hope. Also my resume. Based on the text adventure games Zork I, II, and III.
-                    <br />
-                    Contact info: 
-                    <a href="mailto:admin@devonhope.net">admin@devonhope.net</a>
-                </p> 
-            </footer>
-        </main>
-    </body>
+        </div>
+    </main>
+</body>
 </html>

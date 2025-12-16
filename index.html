@@ -1,83 +1,16 @@
-<!--You know what you did-->
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="A website by Devon Hope">
-        <meta name="keywords" content="HTML, CSS, JavaScript">
-        <meta name="author" content="Devon Hope">
-        <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
-        <script src="console.js"></script>
-        <script src="https://cdn.babylonjs.com/babylon.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylon.glTF2FileLoader.min.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylon.stlFileLoader.min.js"></script>
-        <script>
-            // Ensure STL loader is properly registered after loading
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof BABYLON !== 'undefined' && BABYLON.SceneLoader) {
-                    // Check if STL loader is available by checking the class exists
-                    console.log('Checking STL loader availability...');
-                    if (typeof BABYLON.STLFileLoader !== 'undefined') {
-                        console.log('STL loader class is available');
-                        // Try to register the STL loader
-                        try {
-                            BABYLON.SceneLoader.RegisterPlugin(new BABYLON.STLFileLoader());
-                            console.log('STL loader registered successfully');
-                        } catch (e) {
-                            console.log('STL loader might already be registered:', e.message);
-                        }
-                    } else {
-                        console.error('STL loader class not found - check if babylon.stlFileLoader.min.js loaded properly');
-                    }
-                } else {
-                    console.error('BABYLON.SceneLoader not available');
-                }
-            });
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Explorer — Devon Hope</title>
+        <link rel="stylesheet" href="css/style.css">
         <link rel = "icon" href ="assets/favicon.png"  type = "image/x-icon">
-        <title>Console</title>
     </head>
-    <body id="bod" onload="setup(0);">
-        <main class="gc">
-            <header class="head">Devon Hope</header>
-            <div class="container" onclick="menu(this)">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
-            <div id="mySidenav" class="sidenav">
-                <a href="index.html">HOME</a>
-                <a href="pages/projects.html">PROJECTS</a>
-                <a href="pages/work.html">WORK</a>
-                <a href="pages/edu.html">EDUCATION</a>
-                <a href="https://imgur.com/t/memes" target="_blank" rel="noopener noreferrer">MEMES</a>
-                <a href="pages/about.html">ABOUT</a>
-            </div>
-            <div class="cons">
-                <div class="containcons">
-                    <div class="curarea">
-                        <label class="calbl" id="calbl"></label>
-                    </div>
-                    <textarea class="console" id="consout" readonly></textarea>
-                    <div class="inputarea">
-                        <label class="arlbl" id="arlbl"></label>
-                        <input class="in" id="in" onkeypress="onEnter(event)">
-                    </div>
-                </div>
-                <res class="res" id="res">
-                </res>
-            </div>
-            <footer class="foot">
-                <p>
-                    A webventure by Devon Hope. Also my resume. Based on the text adventure games Zork I, II, and III.
-                    <br />
-                    Contact info:
-                    <a href="mailto:admin@devonhope.net">admin@devonhope.net</a>
-                </p>
-            </footer>
+    <body>
+        <!-- Explorer preview embedded as root index for GitHub Pages -->
+        <main>
+            <iframe src="explorer.html" style="width:100%;height:100vh;border:none;" title="Explorer preview"></iframe>
         </main>
     </body>
 </html>

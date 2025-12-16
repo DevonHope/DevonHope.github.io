@@ -31,18 +31,18 @@ var readbool = false;
 var PROJECTS = false;
 var WORK = false;
 var EDUCATION = false;
-var MEMES = false;
+var OBJECTS = false;
 
 const helpdisc = 'Use \'help\' to display commands.';
 
-const destinations = ['PROJECTS', 'WORK', 'EDUCATION', 'MEMES'];
+const destinations = ['PROJECTS', 'WORK', 'EDUCATION', 'OBJECTS'];
 
 const lkdict = {
     'HOME': 'You are standing in the main foyer of the Home.\
             \nTo the North is the hall of Projects.\
             \nTo the West is the office of Work.\
             \nTo the East is the library of Education.\
-            \nTo the South is the den of Memes.',
+            \nTo the South is the 3D objects gallery.',
     'PROJECTS': 'You are gazing in the hall of Projects.\
               \nTo the South is the main foyer of the Home.\
               \nTo the West is the office of Work.\
@@ -52,17 +52,17 @@ const lkdict = {
             \nTo the North is the hall of Projects.\
             \nTo the West is a window.\
             \nTo the East is the main foyer of the Home.\
-            \nTo the South is the den of Memes.',
+            \nTo the South is the 3D objects gallery.',
     'EDUCATION': 'You are sitting in the den of Education.\
             \nTo the North lies the hall of Projects.\
             \nTo the West is the main foyer of the Home.\
             \nTo the East is another wall, with a small crack.\
-            \nTo the South is the den of Memes.',
-    'MEMES': 'You are standing in the library of Memes.\
+            \nTo the South is the 3D objects gallery.',
+    'OBJECTS': 'You are standing in the 3D objects gallery.\
             \nTo the North lies the main foyer of the Home.\
             \nTo the West is the office of Work.\
             \nTo the East is the library of Education.\
-            \nTo the South is half eaten sandwich on an endtable.'
+            \nTo the South is a small display table of sample objects.'
 
 };
 
@@ -74,16 +74,16 @@ const map =    '...........-P-...........\
               \n..---------------------..\
               \n.....---------------.....\
               \n........---------........\
-              \n...........-M-...........\
+              \n...........-O-...........\
               \nLEGEND: \
               \n P - PROJECTS \
               \n W - WORK \
               \n E - EDUCATION \
-              \n M - MEMES ';
+              \n O - 3D Objects ';
 
 const destidict = {
     "PROJECTS": "You have entered the hall of Projects.",
-    "MEMES": "You have entered the den of Memes.",
+    "OBJECTS": "You have entered the 3D objects gallery.",
     "EDUCATION": "You have entered the library of Education.",
     "WORK": "You have entered the office of Work.",
     "rh": "You have returned to the foyer of the Home.",
@@ -98,7 +98,7 @@ const descdict = {
         "north": "PROJECTS",
         "west": "WORK",
         "east": "EDUCATION",
-        "south": "MEMES"
+        "south": "OBJECTS"
     }, "PROJECTS": {
         "north": "den",
         "west": "WORK",
@@ -108,13 +108,13 @@ const descdict = {
         "north": "PROJECTS",
         "west": "dew",
         "east": "rh",
-        "south": "MEMES"
+        "south": "OBJECTS"
     }, "EDUCATION": {
         "north": "PROJECTS",
         "west": "rh",
         "east": "dee",
-        "south": "MEMES"
-    }, "MEMES": {
+        "south": "OBJECTS"
+    }, "OBJECTS": {
         "north": "rh",
         "west": "WORK",
         "east": "EDUCATION",
@@ -166,6 +166,10 @@ function generateDynamicContent() {
             'html': generateEducationHTML(),
             'height': '1000px'
         },
+        'OBJECTS': {
+            'html': generateObjectsHTML(),
+            'height': '1400px'
+        },
         'ABOUT': {
             'html': generateAboutHTML(),
             'height': '1200px'
@@ -176,22 +180,6 @@ function generateDynamicContent() {
 // Generate Projects HTML - uses static content (will use separate projects YAML later)
 function generateProjectsHTML() {
     return `<label class="pagehead"> PROJECTS</label >
-                <div class="subhead">3D Modelling</div>
-                <div id="slideshow-wrapper">
-                    <button class="arrow left" onclick="scrollSlideshow(-1)" title="Previous model/slide">&#9664;</button>
-                    <div id="slideshow">
-                        <canvas id="modelCanvas"></canvas>
-                    </div>
-                    <button class="arrow right" onclick="scrollSlideshow(1)" title="Next model/slide">&#9654;</button>
-                </div>
-                <div id="slideshow-controls" style="text-align: center; margin: 10px 0;">
-                    <button onclick="previousSlide()" style="margin: 0 5px; padding: 5px 10px; background: #333; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;">Previous Project</button>
-                    <button onclick="nextSlide()" style="margin: 0 5px; padding: 5px 10px; background: #333; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;">Next Project</button>
-                    <button onclick="cycleColorScheme()" style="margin: 0 5px; padding: 5px 10px; background: #444; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;" title="Change color scheme">Colors</button>
-                    <button onclick="toggleFullscreen()" style="margin: 0 5px; padding: 5px 10px; background: #444; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;" title="Toggle fullscreen viewer">Fullscreen</button>
-                    <button onclick="toggleExplodeView()" style="margin: 0 5px; padding: 5px 10px; background: #444; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;" title="Explode/collapse view">Explode</button>
-                </div>
-
                 <div class="subhead">Software Dev</div>
                 <div class="subsub">DevonHope.github.io</div>
                 <div class="subsubsub">Description: A website to promote and display my educational, professional and personal experience through a small text based adventure game.</div>
@@ -213,10 +201,7 @@ function generateProjectsHTML() {
                 <div class="subsubsub">Status: Complete</div>
                 <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Python_CSV_Parser" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Python_CSV_Parser</a></div>
 
-                <div class="subsub">Meme-to-CC</div>
-                <div class="subsubsub">Description: A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.</div>
-                <div class="subsubsub">Status: roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.</div>
-                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Meme-to-CC" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Meme-to-CC</a></div>
+                <!-- Removed Meme-to-CC project -->
 
                 <div class="subsub"></div>
                 <div class="subhead">Hardware Integration Development</div>
@@ -236,6 +221,26 @@ function generateProjectsHTML() {
                 <div class="subsub">Racing Simulator</div>
                 <div class="subsubsub">Description: A frabricated wooden and aluminum frame housing a fanatecs racing wheel, pedals, gear shift, and racing seat.</div>
                 <div class="subsubsub">Status: Complete</div>`;
+}
+
+// Generate 3D Objects / Viewer HTML
+function generateObjectsHTML(){
+    return `<label class="pagehead"> 3D OBJECTS</label >
+                <div class="subhead">3D Modelling Gallery</div>
+                <div id="slideshow-wrapper">
+                    <button class="arrow left" onclick="scrollSlideshow(-1)" title="Previous model/slide">&#9664;</button>
+                    <div id="slideshow">
+                        <canvas id="modelCanvas"></canvas>
+                    </div>
+                    <button class="arrow right" onclick="scrollSlideshow(1)" title="Next model/slide">&#9654;</button>
+                </div>
+                <div id="slideshow-controls" style="text-align: center; margin: 10px 0;">
+                    <!-- Previous/Next project buttons removed as requested -->
+                    <button onclick="cycleColorScheme()" style="margin: 0 5px; padding: 6px 10px; background: transparent; border: 2px solid #FFFFFF; color: #DDD; border-radius: 0; font-family: 'IBM Plex Mono', monospace; font-weight:600; cursor: pointer;" title="Change color scheme">Colors</button>
+                    <button onclick="toggleFullscreen()" style="margin: 0 5px; padding: 6px 10px; background: transparent; border: 2px solid #FFFFFF; color: #DDD; border-radius: 0; font-family: 'IBM Plex Mono', monospace; font-weight:600; cursor: pointer;" title="Toggle fullscreen viewer">Fullscreen</button>
+                    <button onclick="toggleExplodeView()" style="margin: 0 5px; padding: 6px 10px; background: transparent; border: 2px solid #FFFFFF; color: #DDD; border-radius: 0; font-family: 'IBM Plex Mono', monospace; font-weight:600; cursor: pointer;" title="Explode/collapse view">Explode</button>
+                        
+                    </div>`;
 }
 
 // Generate Work HTML from YAML data
@@ -378,10 +383,7 @@ const inhtml = {
                 <div class="subsubsub">Status: Complete</div>
                 <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Python_CSV_Parser" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Python_CSV_Parser</a></div>
 
-                <div class="subsub">Meme-to-CC</div>
-                <div class="subsubsub">Description: A python script using the reddit-API to scrape set subreddits for memes and then format and crop those memes to fit the standard size requirments of a Google Chromecast, to be used as a set of wallpapers.</div>
-                <div class="subsubsub">Status: roadblock: google-api for google photos only allows the upload of photos to newly created albums, and chromecast requires the manual setting of photos folder to use.</div>
-                <div class="subsubsub">Link: <a href="https://github.com/DevonHope/Meme-to-CC" target="_blank" rel="noopener noreferrer">https://github.com/DevonHope/Meme-to-CC</a></div>
+                <!-- Meme-to-CC removed -->
 
                 <div class="subsub"></div>
                 <div class="subhead">Hardware Integration Development</div>
@@ -518,6 +520,25 @@ const inhtml = {
                 <li>Prolog</li>
             </ul>`
     }
+    , 'OBJECTS': {
+        'html': `<label class="pagehead"> 3D OBJECTS</label >
+                <div class="subhead">3D Modelling Gallery</div>
+                <div id="slideshow-wrapper">
+                    <button class="arrow left" onclick="scrollSlideshow(-1)" title="Previous model/slide">&#9664;</button>
+                    <div id="slideshow">
+                        <canvas id="modelCanvas"></canvas>
+                    </div>
+                    <button class="arrow right" onclick="scrollSlideshow(1)" title="Next model/slide">&#9654;</button>
+                </div>
+                <div id="slideshow-controls" style="text-align: center; margin: 10px 0;">
+                    <button onclick="previousSlide()" style="margin: 0 5px; padding: 5px 10px; background: #333; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;">Previous Project</button>
+                    <button onclick="nextSlide()" style="margin: 0 5px; padding: 5px 10px; background: #333; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;">Next Project</button>
+                    <button onclick="cycleColorScheme()" style="margin: 0 5px; padding: 5px 10px; background: #444; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;" title="Change color scheme">Colors</button>
+                    <button onclick="toggleFullscreen()" style="margin: 0 5px; padding: 5px 10px; background: #444; border: 1px solid #666; color: #FFA584; border-radius: 3px; font-family: 'IBM Plex Mono', monospace; cursor: pointer;" title="Toggle fullscreen viewer">Fullscreen</button>
+                </div>
+        `,
+        'height':'1400px'
+    }
 }
 
 const setupDict = {
@@ -643,6 +664,10 @@ function generateColorScheme(type, count) {
         case 'cool':
             return generateCoolColors(count);
         case 'vibrant':
+            return generateRandomColors(count);
+        case 'edges':
+            // Represent edge-only scheme by returning an array of nulls
+            return Array.from({length: count}, () => null);
         default:
             return generateRandomColors(count);
     }
@@ -688,6 +713,12 @@ function setupSlideshow() {
     // Manual slideshow configuration - each folder becomes a slide with all its models
     const modelFolders = [
         {
+            folderName: "Ghost Hunting Gadget",
+            displayName: "Ghost Hunting Device", // Shorter display name
+            color: new BABYLON.Color3(0.8, 1, 0.8), // Light green
+            models: [] // Will be populated from file list
+        },
+        {
             folderName: "Multipass",
             displayName: "Multipass ID Card", // Optional: custom display name
             color: new BABYLON.Color3(1, 1, 1), // White (default)
@@ -697,12 +728,6 @@ function setupSlideshow() {
             folderName: "Multi-Directional Eye Puzzle Mech",
             displayName: "Eye Puzzle Mechanism", // Shorter display name
             color: new BABYLON.Color3(0.8, 0.9, 1), // Light blue
-            models: [] // Will be populated from file list
-        },
-        {
-            folderName: "Ghost Hunting Gadget",
-            displayName: "Ghost Hunting Device", // Shorter display name
-            color: new BABYLON.Color3(0.8, 1, 0.8), // Light green
             models: [] // Will be populated from file list
         },
         {
@@ -758,23 +783,24 @@ function populateModelsFromKnownFiles(modelFolders, basePath) {
         // Generate random colors for all models in this folder
         console.log(`Generating ${supportedFiles.length} random colors for ${folder.folderName}`);
         
-        // Choose color scheme - you can change this for different effects
-        const colorSchemes = ['vibrant', 'rainbow', 'warm', 'cool'];
-        const randomScheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
-        const randomColors = generateColorScheme(randomScheme, supportedFiles.length);
+        // Start the color cycle with 'edges' (wireframe) by default so the
+        // viewer opens in edge-only mode. The 'edges' scheme generates null
+        // colors which the loader interprets as edge-only rendering.
+        const initialScheme = 'edges';
+        const initialColors = generateColorScheme(initialScheme, supportedFiles.length);
         
-        console.log(`Using ${randomScheme} color scheme for ${folder.folderName}`);
-        
-        // Assign models with their individual random colors
+        console.log(`Using ${initialScheme} color scheme for ${folder.folderName} (initial)`);
+
+        // Assign models with their initial edge-only scheme
         supportedFiles.forEach((fileName, index) => {
             folder.models.push({
                 fileName: fileName,
                 fullPath: folderPath + fileName,
-                color: randomColors[index], // Each model gets its own random color
-                colorScheme: randomScheme   // Track which scheme was used
+                color: initialColors[index], // null for 'edges' => edge-only
+                colorScheme: initialScheme   // Track which scheme was used
             });
-            
-            console.log(`${folder.folderName}: ${fileName} assigned color ${index + 1} (${randomScheme})`);
+
+            console.log(`${folder.folderName}: ${fileName} assigned initial scheme ${initialScheme}`);
         });
     }
 }
@@ -970,6 +996,9 @@ function babylonLoadAllModelsInSlide(canvasId, slide) {
     
     const scene = new BABYLON.Scene(engine);
     window.currentScene = scene;
+    // Edge thickness for outline rendering (px). Can be overridden at runtime via window.edgeThickness
+    const EDGE_THICKNESS = (window.edgeThickness && Number(window.edgeThickness)) ? Number(window.edgeThickness) : 75.0;
+    window.edgeThickness = EDGE_THICKNESS;
     
     scene.clearColor = new BABYLON.Color4(0.05, 0.05, 0.05, 1);
 
@@ -1113,6 +1142,21 @@ function babylonLoadAllModelsInSlide(canvasId, slide) {
             }
         }
 
+        // Apply configured edge thickness and color to all loaded meshes
+        try{
+            const thickness = window.edgeThickness || EDGE_THICKNESS || 3.0;
+            allMeshes.forEach(m => {
+                if (m && typeof m.enableEdgesRendering === 'function'){
+                    m.enableEdgesRendering();
+                    m.edgesWidth = thickness;
+                    m.edgesColor = new BABYLON.Color4(1,1,1,1);
+                } else if (m && m.material){
+                    // fallback: try to set wireframe material thickness isn't available
+                    try{ m.material.wireframe = true; }catch(e){}
+                }
+            });
+        }catch(e){ console.warn('Could not apply edge thickness to all meshes', e); }
+
         // Firefox-specific rendering fixes
         if (isFirefoxBrowser) {
             console.log('Firefox: Applying final rendering fixes for all models...');
@@ -1159,83 +1203,77 @@ function babylonLoadAllModelsInSlide(canvasId, slide) {
                 
                 // Apply color and positioning to new meshes
                 newMeshes.forEach(mesh => {
-                    if (mesh.geometry || mesh.getVerticesData) {
-                        // Save original coordinates before any transformations
-                        saveOriginalCoordinates(mesh);
-                        
-                        allMeshes.push(mesh);
-                        
-                        // Log original position data for debugging
-                        console.log(`Model ${model.fileName} loaded at original position:`, {
-                            position: {x: mesh.position.x, y: mesh.position.y, z: mesh.position.z},
-                            rotation: {x: mesh.rotation.x, y: mesh.rotation.y, z: mesh.rotation.z},
-                            scaling: {x: mesh.scaling.x, y: mesh.scaling.y, z: mesh.scaling.z}
-                        });
-                        
-                        // Apply model-specific coloring with enhanced debugging
-                        console.log(`Attempting to apply color to ${model.fileName}:`, model.color);
-                        
-                        if (model.color) {
-                            // Force material creation for STL files (which typically don't have materials)
+                    if (!(mesh.geometry || mesh.getVerticesData)) return;
+
+                    // Save original coordinates before any transformations
+                    saveOriginalCoordinates(mesh);
+                    allMeshes.push(mesh);
+
+                    // Log original position data for debugging
+                    console.log(`Model ${model.fileName} loaded at original position:`, {
+                        position: `(${mesh.position.x.toFixed(3)}, ${mesh.position.y.toFixed(3)}, ${mesh.position.z.toFixed(3)})`,
+                        rotation: `(${mesh.rotation.x.toFixed(3)}, ${mesh.rotation.y.toFixed(3)}, ${mesh.rotation.z.toFixed(3)})`,
+                        scaling: `(${mesh.scaling.x.toFixed(3)}, ${mesh.scaling.y.toFixed(3)}, ${mesh.scaling.z.toFixed(3)})`
+                    });
+
+                    const wantEdgeOnly = (!model.color) || (model.colorScheme && String(model.colorScheme).toLowerCase() === 'edges');
+
+                    try {
+                        if (wantEdgeOnly) {
+                            // Edge-only: transparent faces + edge rendering
+                            const edgeMat = new BABYLON.StandardMaterial(`${mesh.name}_edgeMat`, scene);
+                            edgeMat.diffuseColor = new BABYLON.Color3(0,0,0);
+                            edgeMat.specularColor = new BABYLON.Color3(0,0,0);
+                            edgeMat.emissiveColor = new BABYLON.Color3(0,0,0);
+                            edgeMat.alpha = 0;
+                            edgeMat.backFaceCulling = false;
+                            mesh.material = edgeMat;
+
+                            try { if (typeof mesh.convertToFlatShadedMesh === 'function') mesh.convertToFlatShadedMesh(); } catch(e){}
+
+                            if (typeof mesh.enableEdgesRendering === 'function'){
+                                mesh.enableEdgesRendering();
+                                mesh.edgesWidth = window.edgeThickness || 3.0;
+                                mesh.edgesColor = new BABYLON.Color4(1,1,1,1);
+                            } else {
+                                // fallback to white wireframe material
+                                edgeMat.alpha = 1.0;
+                                edgeMat.diffuseColor = new BABYLON.Color3(1,1,1);
+                                edgeMat.wireframe = true;
+                                edgeMat.emissiveColor = new BABYLON.Color3(1,1,1);
+                                edgeMat.backFaceCulling = false;
+                                mesh.material = edgeMat;
+                            }
+                        } else {
+                            // Colored material path
                             if (!mesh.material || mesh.material.name === "default material") {
-                                console.log(`Creating new material for ${mesh.name} (STL file)`);
                                 const newMaterial = new BABYLON.StandardMaterial(`${mesh.name}_material`, scene);
                                 newMaterial.diffuseColor = model.color;
                                 newMaterial.specularColor = new BABYLON.Color3(0.3, 0.3, 0.3);
                                 newMaterial.ambientColor = new BABYLON.Color3(0.2, 0.2, 0.2);
                                 mesh.material = newMaterial;
-                                console.log(`Created and applied new StandardMaterial to ${mesh.name}`);
-                            } else if (mesh.material) {
-                                console.log(`Mesh ${mesh.name} has existing material:`, mesh.material.constructor.name);
-                                
-                                // Handle different material types
-                                if (mesh.material instanceof BABYLON.PBRMaterial) {
-                                    mesh.material.baseColor = model.color;
-                                    console.log(`Applied baseColor to PBR material for ${mesh.name}`);
-                                } else if (mesh.material instanceof BABYLON.StandardMaterial) {
-                                    mesh.material.diffuseColor = model.color;
-                                    console.log(`Applied diffuseColor to Standard material for ${mesh.name}`);
-                                } else if (mesh.material.subMaterials) {
-                                    // Handle multi-materials
-                                    mesh.material.subMaterials.forEach((subMat, subIndex) => {
-                                        if (subMat instanceof BABYLON.PBRMaterial) {
-                                            subMat.baseColor = model.color;
-                                        } else if (subMat instanceof BABYLON.StandardMaterial) {
-                                            subMat.diffuseColor = model.color;
-                                        }
-                                        console.log(`Applied color to sub-material ${subIndex} for ${mesh.name}`);
-                                    });
-                                } else {
-                                    console.log(`Unknown material type for ${mesh.name}:`, mesh.material.constructor.name);
-                                    // Fallback: try to set diffuseColor anyway
-                                    try {
-                                        mesh.material.diffuseColor = model.color;
-                                        console.log(`Applied fallback diffuseColor to ${mesh.name}`);
-                                    } catch (e) {
-                                        console.warn(`Could not apply color to ${mesh.name}:`, e.message);
-                                    }
-                                }
+                            } else if (mesh.material instanceof BABYLON.PBRMaterial) {
+                                mesh.material.baseColor = model.color;
+                            } else if (mesh.material instanceof BABYLON.StandardMaterial) {
+                                mesh.material.diffuseColor = model.color;
+                            } else if (mesh.material.subMaterials) {
+                                mesh.material.subMaterials.forEach((subMat) => {
+                                    if (subMat instanceof BABYLON.PBRMaterial) subMat.baseColor = model.color;
+                                    else if (subMat instanceof BABYLON.StandardMaterial) subMat.diffuseColor = model.color;
+                                });
+                            } else {
+                                try { mesh.material.diffuseColor = model.color; } catch(e){}
                             }
-                        } else {
-                            console.warn(`No color assigned to model ${model.fileName}`);
                         }
-                        
-                        // COORDINATE PRESERVATION OPTIONS:
-                        // Option 1: Preserve original coordinates exactly (recommended for CAD files)
-                        // This respects the coordinate system from the original CAD software
-                        // mesh.position = mesh.position; // Keep original position (no change needed)
-                        
-                        // Option 2: Apply slide-specific transformation
-                        // You can define custom positioning per slide/project
-                        applySlideSpecificTransform(mesh, model, slide, index);
-                        
-                        mesh.setEnabled(true);
-                        mesh.isVisible = true;
-                        
-                        if (isFirefoxBrowser) {
-                            mesh.refreshBoundingInfo();
-                        }
+                    } catch (e) {
+                        console.warn(`Could not apply material to ${mesh.name}:`, e.message || e);
                     }
+
+                    // Apply transforms and finalize
+                    applySlideSpecificTransform(mesh, model, slide, index);
+                    mesh.setEnabled(true);
+                    mesh.isVisible = true;
+                    if (isFirefoxBrowser) mesh.refreshBoundingInfo();
                 });
                 
                 modelsLoaded++;
@@ -1524,8 +1562,8 @@ function regenerateColors(colorScheme = null) {
     
     window.slideList.forEach(slide => {
         if (slide.models && slide.models.length > 0) {
-            // Choose a random color scheme if none specified
-            const colorSchemes = ['vibrant', 'rainbow', 'warm', 'cool'];
+            // Choose a random color scheme if none specified; include 'edges'
+            const colorSchemes = ['vibrant', 'rainbow', 'warm', 'cool', 'edges'];
             const scheme = colorScheme || colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
             
             const newColors = generateColorScheme(scheme, slide.models.length);
@@ -1584,12 +1622,12 @@ function cycleColorScheme() {
     }
     
     // Available color schemes
-    const colorSchemes = ['vibrant', 'rainbow', 'warm', 'cool'];
+    const colorSchemes = ['vibrant', 'rainbow', 'warm', 'cool', 'edges'];
     const currentScheme = currentSlide.models[0].colorScheme || 'vibrant';
-    
+
     // Find next scheme in cycle
     const currentIndex = colorSchemes.indexOf(currentScheme);
-    const nextIndex = (currentIndex + 1) % colorSchemes.length;
+    const nextIndex = (currentIndex === -1) ? 0 : (currentIndex + 1) % colorSchemes.length;
     const nextScheme = colorSchemes[nextIndex];
     
     // Generate new colors
@@ -1609,6 +1647,8 @@ function cycleColorScheme() {
     // Reload the current slide to apply new colors
     loadSlide(window.currentSlideIndex);
 }
+
+// edge-thickness UI removed; adjust `window.edgeThickness` programmatically if needed
 
 // Explode view functionality - State machine for individual slides
 let slideExplodeStates = {}; // Track explosion state per slide
@@ -3064,12 +3104,8 @@ function res() {
 
     //check if the curarea is not home
     if (destinations.some(substring => ca.includes(substring))) {
-        if (ca === destinations[3]) {
-            window.open('https://imgur.com/t/memes', '_black');
-        } else {
-            //add the div
-            adddiv(ca);
-        }
+        // add the div for any destination (OBJECTS handled like other pages)
+        adddiv(ca);
     }
 }
 
@@ -3084,18 +3120,29 @@ function adddiv(ca) {
     
     for (i in contentData) {
         if (ca === i) {
-            di.innerHTML = contentData[i]['html'];
-            // Use min-height instead of fixed height to prevent overlap
-            document.getElementsByClassName('cons')[0].style.minHeight = contentData[i]['height'];
-            document.getElementsByClassName('cons')[0].style.height = 'auto';
-            document.getElementsByClassName('cons')[0].style.paddingBottom = '50px';
+                        di.innerHTML = contentData[i]['html'];
+                        // Use a capped min-height instead of the raw value to avoid huge empty space
+                        const consElem = document.getElementsByClassName('cons')[0];
+                        const rawH = contentData[i]['height'] || '';
+                        let desiredMin = 0;
+                        if(typeof rawH === 'string' && rawH.endsWith('px')){
+                            desiredMin = parseInt(rawH.replace('px','')) || 0;
+                        } else if(typeof rawH === 'number'){
+                            desiredMin = rawH;
+                        }
+                        // Cap growth so explorer console doesn't become enormous
+                        const CAP_MIN = 420; // px
+                        const appliedMin = desiredMin ? Math.min(desiredMin, CAP_MIN) : '';
+                        if(appliedMin) consElem.style.minHeight = appliedMin + 'px'; else consElem.style.minHeight = '';
+                        consElem.style.height = 'auto';
+                        consElem.style.paddingBottom = '50px';
             document.getElementById('res').appendChild(di);
             
-            // Initialize 3D slideshow if this is the projects page
-            if (ca === 'PROJECTS') {
+            // Initialize 3D slideshow if this is the projects or objects page
+            if (ca === 'PROJECTS' || ca === 'OBJECTS') {
                 // Wait for DOM to update before initializing slideshow
                 setTimeout(() => {
-                    setupSlideshow();
+                    try{ setupSlideshow(); }catch(e){ console.warn('setupSlideshow failed', e); }
                 }, 100);
             }
             
@@ -3171,7 +3218,7 @@ function desc(inp) {
                         return val;
                     } else {
                         //handle first time visits to each destination
-                        if (!PROJECTS || !WORK || !EDUCATION || !MEMES) {
+                        if (!PROJECTS || !WORK || !EDUCATION || !OBJECTS) {
                             if (descdict[area][dir] === 'PROJECTS' && !PROJECTS) {
                                 PROJECTS = true;
                                 val = lkdict['PROJECTS'];
@@ -3181,9 +3228,9 @@ function desc(inp) {
                             } else if (descdict[area][dir] === 'EDUCATION' && !EDUCATION) {
                                 EDUCATION = true;
                                 val = lkdict['EDUCATION'];
-                            } else if (descdict[area][dir] === 'MEMES' && !MEMES) {
-                                MEMES = true;
-                                val = lkdict['MEMES'];
+                            } else if (descdict[area][dir] === 'OBJECTS' && !OBJECTS) {
+                                OBJECTS = true;
+                                val = lkdict['OBJECTS'];
                             } else {
                                 val = destidict[descdict[area][dir]];
                             }
